@@ -1,0 +1,265 @@
+delegation_id,delegation_name,governorate_name,taux_pauvrete_2015,y_pred_within_anchored,shap_driver_1,shap_driver_2,shap_driver_3
+11933810B37215570160824,القصور,El Kef,37.1,34.32561337364196,Surface Water Deficit,NDBI_std,Low Vegetation Canopy
+11933810B66585629816917,المزونة,Sidi Bouzid,34.3,23.0499661349433,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B82124432646139,العروسة,Siliana,20.0,27.529726193166265,Surface Water Deficit,LST_Celsius_std,Low Vegetation Canopy
+11933810B80183977842330,ماطر,Bizerte,34.0,18.209055734750624,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B43888701821775,الجم,Mahdia,26.5,20.213640379749336,High Thermal LST Stress,High Thermal Aridity,NDBI_std
+11933810B93906060339366,القصر,Gafsa,16.9,17.09591049870318,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B57127812574337,صفاقس الجنوبية,Sfax,3.0,3.738096478038609,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B10905453653895,غزالة,Bizerte,19.3,17.58752162697398,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B38600373367169,سيدي عيش,Gafsa,31.2,17.497820692968016,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B46466927285708,الشبيكة,Kairouan,24.2,35.26242083896383,LST_Celsius_std,SAVI_std,NDVI_std
+11933810B49203985770178,تطاوين الشمالية,Tataouine,18.4,11.912716574577471,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B42878076535883,رمادة,Tataouine,33.3,39.35865489953325,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B83498935151337,الصمار,Tataouine,27.4,11.215889299221756,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B11827339972029,سليمان,Nabeul,19.1,5.379878218340775,Low Electrification (NTL),Surface Water Deficit,Economic-Thermal Deficit
+11933810B93669853270617,أولاد حفوز,Sidi Bouzid,21.3,22.480801432397648,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B54153099076840,الرديف,Gafsa,21.1,17.99780558752391,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B17149479798456,الناظور,Zaghouan,22.5,14.407075061116387,Surface Water Deficit,NDBI_std,Low Vegetation Canopy
+11933810B3957312331643,زرمدين,Monastir,13.1,8.781338739022644,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B51337682918507,القيروان الجنوبية,Kairouan,23.0,34.35179063104929,SAVI_std,NDVI_std,High Thermal LST Stress
+11933810B93089307586019,قابس الغربية,Gabès,15.0,14.742706144062952,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B87788045325558,أوتيك,Bizerte,12.2,16.460833485744402,Surface Water Deficit,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B95745204086870,سيدي مخلوف,Médenine,33.4,21.357235641611435,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B61155262377860,مارث,Gabès,21.2,16.43421537700883,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B61814585339016,تالة,Kasserine,41.4,33.11950340023692,SAVI_std,NDVI_std,EVI_std
+11933810B10637834163678,بنزرت الجنوبية,Bizerte,15.9,17.490247793813367,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B59009288682307,الكاف الشرقية,El Kef,24.6,32.89670794091411,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B77828978418448,جبنيانة,Sfax,8.7,8.050146349841954,High Thermal LST Stress,Economic-Thermal Deficit,NDWI_std
+11933810B2147309578114,مطماطة الجديدة,Gabès,23.6,16.101884728060494,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B84977870340871,عين دراهم,Jendouba,27.2,22.11583884075251,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B24565531401721,السند,Gafsa,27.2,17.73656886650141,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B45442684753250,التحرير,Tunis,2.0,4.807145036464632,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B21943551709100,جلمة,Sidi Bouzid,31.4,23.32797195494698,High Thermal LST Stress,Built-Environment Deficit,NDWI_std
+11933810B27074780106305,الزهور,Tunis,27.8,4.921609245998255,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B6714146070039,حيدرة,Kasserine,30.9,32.43997349927352,LST_Celsius_std,NDWI_std,High Thermal LST Stress
+11933810B18230049002493,المدينة,Tunis,6.6,4.084522910760703,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B70158392681362,النفيضة,Sousse,23.8,19.30377973816905,Surface Water Deficit,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B78138707020335,باب سويقة,Tunis,4.5,0.1,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B79340019170790,بنزرت الشمالية,Bizerte,5.3,18.1476828159376,Surface Water Deficit,Low Vegetation Canopy,LST_Celsius_std
+11933810B49530197885075,الزريبة,Zaghouan,13.0,11.780971674929468,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B5079624698745,مدنين االجنوبية,Médenine,20.7,21.81201337841719,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B55082969984596,السواسي,Mahdia,29.2,19.114230162146608,High Thermal LST Stress,LST_Celsius_std,Built-Environment Deficit
+11933810B3203162636288,فوشانة,Ben Arous,7.3,1.3567035132843124,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B75310279086219,مجاز الباب,Béja,17.1,31.43576878850269,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B2824472069390,مرناق,Ben Arous,11.2,5.974166294070511,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B89916598335200,المرسى,Tunis,2.2,7.181474617006328,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B30611491582390,المطوية,Gabès,17.9,15.253768456022566,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B38388231155929,المضيلة,Gafsa,18.7,18.37548055720729,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B11969920480260,القطار,Gafsa,19.8,18.55864088694697,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B88432623246130,قبلي الشمالية,Kébili,15.8,17.89606239160892,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B29604582719412,باجة الجنوبية,Béja,18.5,32.24097149154249,Surface Water Deficit,Low Vegetation Canopy,LST_Celsius_std
+11933810B6535547360334,القصرين الشمالية,Kasserine,18.9,32.78929899067179,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B95103152566623,باردو,Tunis,1.8,8.03638129385812,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B5544515796376,الميدة,Nabeul,11.7,7.229829881005748,Surface Water Deficit,LST_Celsius_std,Low Vegetation Canopy
+11933810B20435458440644,حفوز,Kairouan,31.4,35.49885290855383,NDBI_std,LST_Celsius_std,NDWI_std
+11933810B76458029989338,شربان,Mahdia,36.9,22.445113888359725,High Thermal LST Stress,LST_Celsius_std,NDBI_std
+11933810B30403367882459,مكثر,Siliana,40.7,27.737426090497475,Surface Water Deficit,Low Vegetation Canopy,SAVI_std
+11933810B81248278761241,بن عروس,Ben Arous,5.0,3.574610021587655,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B81805450499121,سبيبة,Kasserine,37.1,32.371557053654485,High Thermal LST Stress,Built-Environment Deficit,NDWI_std
+11933810B37574036497971,المكناسي,Sidi Bouzid,23.3,23.125474562388945,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B72846800304376,غار الدماء,Jendouba,24.8,22.83935589055525,Surface Water Deficit,Low Vegetation Canopy,NDWI_std
+11933810B91924190982808,سبالة أوالد عسكر,Sidi Bouzid,31.2,23.200072807018508,High Thermal LST Stress,LST_Celsius_std,NDBI_std
+11933810B4781158018226,بورويس,Siliana,26.5,27.519033886008387,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B50994391352057,قفصة الشمالية,Gafsa,23.0,17.558602816566385,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B36279508615628,مدنين الشمالية,Médenine,18.9,20.865946946547822,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B83603965964672,الوسلاتية,Kairouan,40.9,35.16776244654222,Surface Water Deficit,NDBI_std,Low Vegetation Canopy
+11933810B8202711908587,بني حسان,Monastir,10.6,9.835957810547292,Low Electrification (NTL),Economic-Thermal Deficit,LST_Celsius_std
+11933810B14631424416912,القصرين الجنوبية,Kasserine,34.0,32.92147393390347,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B87757841010951,فوسانة,Kasserine,39.8,32.90723650027006,High Thermal LST Stress,LST_Celsius_std,NDBI_std
+11933810B6690726234201,منزل بورقيبة,Bizerte,10.6,18.24043748051832,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B33888578945237,قصور الساف,Mahdia,22.2,23.39823658596653,High Thermal LST Stress,NDBI_std,LST_Celsius_std
+11933810B16609511598620,قربة,Nabeul,7.7,8.22568002855805,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B43224810674441,عمدون,Béja,37.6,32.39608208218914,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B58495148677727,المهدية,Mahdia,13.3,20.26940248056346,NDWI_std,Built-Environment Deficit,Surface Water Deficit
+11933810B21305509879120,الزهور,Kasserine,27.8,32.18094023240049,High Thermal LST Stress,Low Building Footprints,Low Building Density
+11933810B9843874857613,العلاء,Kairouan,38.3,34.557202410112026,High Thermal LST Stress,Low Building Density,Low Building Footprints
+11933810B85460766663298,جرجيس,Médenine,15.8,21.81193311678696,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B63769477321457,Jendouba Nord,Jendouba,19.6,23.385269343928385,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B76554962247664,دقاش,Tozeur,17.4,14.11293529610619,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B30823561868472,طبربة,Manouba,15.2,14.497477133022482,Surface Water Deficit,Low Electrification (NTL),Low Vegetation Canopy
+11933810B61776975949609,صفاقس المدينة,Sfax,2.5,3.1963465549969454,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B38819723902176,قبلاط,Béja,36.9,31.212599233657752,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B33504132443060,نابل,Nabeul,4.7,10.523803803560508,Surface Water Deficit,SAVI_std,NDVI_std
+11933810B24040773299461,منيهلة,Ariana,8.8,5.021836162387505,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B74384837832426,منوبة‬,Manouba,3.8,9.07092677076828,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B33126972723663,منزل جميل,Bizerte,14.5,17.26025578587717,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B84840502063502,مساكن,Sousse,14.1,16.615599568895984,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B37259719331002,ماجل بالعباس,Kasserine,36.9,33.140030554762824,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B95892911712161,كندار,Sousse,17.3,19.42954999095512,Low Electrification (NTL),Economic-Thermal Deficit,NDBI_std
+11933810B44054307576941,قلعة سنان,El Kef,35.3,35.096672456927536,Surface Water Deficit,LST_Celsius_std,NDWI_std
+11933810B62465925468138,قلعة الأندلس,Ariana,12.5,5.936683969200503,Low Electrification (NTL),Economic-Thermal Deficit,Surface Water Deficit
+11933810B35489062673947,قصر هلال,Monastir,8.3,8.20003212612828,Low Electrification (NTL),Economic-Thermal Deficit,Surface Water Deficit
+11933810B27831601054676,قرمبالية,Nabeul,6.4,5.917774389092806,Low Electrification (NTL),Surface Water Deficit,Economic-Thermal Deficit
+11933810B33023449768384,قبلي الجنوبية,Kébili,12.3,17.412119258132776,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B10126944429848,قابس المدينة,Gabès,11.1,14.614733751867425,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B98066234289129,فرنانة,Jendouba,31.5,21.89074809583566,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B83790658636329,غنوش,Gabès,20.0,15.525129783990211,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B65727884052892,‫عقارب‬,Sfax,10.7,5.267059471956928,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B89464736925123,طينة,Sfax,6.2,2.599370633799678,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B49609226357839,طبلبة,Monastir,5.8,9.446958295169992,Low Electrification (NTL),Economic-Thermal Deficit,Low Building Footprints
+11933810B10641809578431,صيادة - لمطة - بوحجر,Monastir,6.8,8.37739466197374,Low Electrification (NTL),Economic-Thermal Deficit,LST_Celsius_std
+11933810B93819416666054,سوسة جوهرة,Sousse,7.0,13.374941810390558,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B21860369421282,رأس الجبل,Bizerte,19.1,18.09386035853149,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B55404586431180,صفاقس الغربية,Sfax,3.0,2.7856373907755145,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B91827641175132,قصيبة المديوني,Monastir,6.7,6.774588647018359,Low Electrification (NTL),Economic-Thermal Deficit,LST_Celsius_std
+11933810B81652618880798,بوعرادة,Siliana,21.8,26.69708442957452,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B45632571730396,سيدي بو علي,Sousse,16.5,15.767572756461815,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B19204281524577,سيدي الهاني,Sousse,27.9,19.173916354309053,Low Electrification (NTL),Economic-Thermal Deficit,Surface Water Deficit
+11933810B13786823130754,سيدي البشير,Tunis,4.2,1.5393365016643037,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B12415666618118,باجة الشمالية,Béja,23.0,32.49888057677805,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B21725458188720,قعفور,Siliana,24.4,27.65541706995728,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B54708226655560,المتلوي,Gafsa,16.2,18.62132463344995,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B97114621769355,‫الصخیرة‬,Sfax,17.4,9.311124830653512,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B76195291286542,الزاوية قصيبة الثريات,Sousse,28.7,13.425717014714577,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B97530891468779,المدينة الجديدة,Ben Arous,5.2,3.105181620521655,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B40013450318318,سوسة الرياض,Sousse,10.7,13.755184612355944,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B9968739853543,نفطة,Tozeur,17.3,14.938795927755992,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B18034425554259,هبيرة,Mahdia,33.4,22.38065454103522,High Thermal LST Stress,NDWI_std,LST_Celsius_std
+11933810B2611958153952,البطان,Manouba,14.5,14.904519163704585,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B25147295271575,الحمامات,Nabeul,8.6,7.645671622420697,Surface Water Deficit,Low Vegetation Canopy,NDBI_std
+11933810B34035527934296,السرس,El Kef,34.4,33.69353695829695,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B96784549406628,العمران الأعلى,Tunis,3.5,3.985486840444208,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B58410238411456,العيون,Kasserine,50.1,32.56386512585284,LST_Celsius_std,High Thermal LST Stress,NDWI_std
+11933810B56753019610878,الكبارية,Tunis,5.3,4.543210668529219,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B70692418830632,المروج,Ben Arous,3.2,4.150977853400064,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B18047024672055,بن قردان,Médenine,23.1,23.957620893126503,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B71937428341343,جربة اجيم,Médenine,16.7,20.75473267554303,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B22764087432985,جربة حومة السوق,Médenine,9.5,21.0084770813501,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B67956509398297,حزوة,Tozeur,22.6,15.309949047202783,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B81607479948477,زغوان,Zaghouan,7.2,11.386496874997071,Surface Water Deficit,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B21220731511134,سليانة الجنوبية,Siliana,19.9,27.56522485004959,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B70280449703815,سيدي بوزيد الغربية,Sidi Bouzid,17.7,22.967295466306748,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B49417994468433,غمراسن,Tataouine,14.4,9.237613386449825,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B60005514770048,قابس الجنوبية,Gabès,9.4,15.925544700896465,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B64556610249653,الشابة,Mahdia,15.5,22.32919793115813,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B13305423353951,طبرقة‎,Jendouba,16.7,22.524007360397054,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B30023985357701,سوق الجديد,Sidi Bouzid,20.8,22.97959023135876,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B8106113048091,سوق الأحد,Kébili,25.9,17.74054312309179,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B8352609818393,سوسة سيدي عبد الحميد,Sousse,17.7,15.898989530275236,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B4615556416921,سوسة المدينة,Sousse,5.5,13.059029328899026,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B69163376090757,سكرة,Ariana,4.8,4.782107475783601,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B55515778364888,ساقية سيدي يوسف,El Kef,37.7,34.24709452720015,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B89439185484115,ساقية الزيت,Sfax,3.2,3.200090997049955,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B13645243771423,ساقية الدائر,Sfax,3.2,4.564145627803518,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B90990960542190,رواد,Ariana,6.9,6.388399149239349,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B4282823233173,دوز الشمالية,Kébili,21.7,18.16935579244609,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B49944749177942,دوز الجنوبية,Kébili,20.4,18.872102760356,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B69098282317118,دوار هيشر,Manouba,10.8,9.055520269729625,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B9429743875970,دار شعبان الفهري,Nabeul,4.9,7.5982085144398,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B96031064721664,حي التضامن,Ariana,12.4,5.238208924061809,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B92430147648185,حمام سوسة,Sousse,8.5,14.061116530783886,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B65786338139889,حلق الوادي,Tunis,1.1,3.920457467737259,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B70107776875396,جرزونة,Bizerte,10.9,17.361005008296754,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B38507486646045,جدليان,Kasserine,53.1,32.270874599769854,Surface Water Deficit,LST_Celsius_std,Low Road Connectivity
+11933810B63287447977470,جبل الجلود,Tunis,9.5,1.492465377837386,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B92881576006474,تينجة,Bizerte,15.1,16.85583386376679,Surface Water Deficit,NDWI_std,Low Vegetation Canopy
+11933810B62164441904454,توزر,Tozeur,10.3,15.088734157722351,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B67504768334789,تمغزة,Tozeur,20.5,13.549585571212676,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B41543815367913,تطاوين الجنوبية,Tataouine,17.1,10.674882679412889,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B76558874378908,تاجروين,El Kef,32.8,33.8786464910041,Surface Water Deficit,NDBI_std,Low Vegetation Canopy
+11933810B84931460768485,بئر علي بن خليفة,Sfax,4.6,8.402327379763705,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B19780106503049,بئر الأحمر,Tataouine,18.4,8.145002012130057,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B69037134075078,بوفيشة,Sousse,21.9,20.720359294316097,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B70885239011208,بو عرقوب,Nabeul,6.3,5.962888283818075,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B39767465855300,بني خلاد,Nabeul,7.1,6.49446596071256,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B3817841111611,برقو,Siliana,25.2,28.14775449526969,Surface Water Deficit,NDBI_std,Low Vegetation Canopy
+11933810B17084695603021,برج العامري,Manouba,12.1,12.55619359574884,Surface Water Deficit,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B61318752024090,الوردية,Tunis,3.9,0.1,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B40616905411348,الوردانين,Monastir,8.7,3.154752649231764,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B72032041676540,المنزه,Tunis,0.2,4.206905831642793,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B15261795399084,الكرم,Tunis,3.0,5.297168265057188,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B46924105449942,القلعة الكبرى,Sousse,16.2,16.325412575921863,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B31167158349382,القلعة الصغرى,Sousse,15.1,17.961896172263273,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B49043051728800,القلعة الخصباء,El Kef,35.3,34.234937634731786,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B67570722535168,الفوار‬,Kébili,25.2,20.909816674364432,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B99487931603822,الفحص,Zaghouan,12.5,13.074414182640428,Surface Water Deficit,LST_Celsius_std,Low Vegetation Canopy
+11933810B8760132099835,الغريبة,Sfax,14.5,8.851877785074146,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B5953362566301,السبيخة,Kairouan,35.1,34.416577369002304,Surface Water Deficit,Low Vegetation Canopy,LST_Celsius_std
+11933810B1906058680343,الساحلين,Monastir,6.7,4.056590897686847,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B82782291879884,الدهماني,El Kef,38.4,34.747070403682535,Surface Water Deficit,NDBI_std,Low Vegetation Canopy
+11933810B93810808295366,الحرائرية,Tunis,6.1,6.4523527197517465,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B26016099352541,الجريصة,El Kef,31.9,35.08385994189307,Surface Water Deficit,SAVI_std,NDVI_std
+11933810B19311233217993,البقالطة,Monastir,4.7,14.871337529845505,NDBI_std,NDWI_std,High Thermal LST Stress
+11933810B52939615202666,أكودة,Sousse,9.3,13.419718082111835,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B85991761590163,أريانة المدينة,Ariana,1.3,4.433610055009509,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B91048903383845,Menzel Chaker,Sfax,12.2,7.372860792705662,Low Electrification (NTL),Economic-Thermal Deficit,High Thermal LST Stress
+11933810B64295465131340,El Hencha,Sfax,11.8,6.763311476109646,Low Electrification (NTL),Economic-Thermal Deficit,High Thermal LST Stress
+11933810B39381734454792,Carthage,Tunis,1.6,5.444844769489713,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B27500273818749,Bou Salem,Jendouba,16.6,23.26623499995974,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B50492442899568,Balta Bouawene,Jendouba,23.1,20.63496901179605,Surface Water Deficit,Low Vegetation Canopy,NDWI_std
+11933810B69695767821716,غار الملح,Bizerte,12.8,17.268138208948173,Surface Water Deficit,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B79768086949873,وادي اللیل‬,Manouba,8.2,9.097324170117169,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B94389885221206,واد مليز,Jendouba,21.0,22.797142123082704,Surface Water Deficit,Low Vegetation Canopy,NDWI_std
+11933810B20916595248179,هرقلة,Sousse,16.3,16.907216639176617,Low Electrification (NTL),Economic-Thermal Deficit,Surface Water Deficit
+11933810B90101987139089,العالية,Bizerte,11.3,15.988342391644329,Surface Water Deficit,Low Vegetation Canopy,Low Electrification (NTL)
+11933810B20445335117262,الشراردة,Kairouan,28.0,35.01892963105321,High Thermal LST Stress,High Thermal Aridity,LST_Celsius_std
+11933810B77374835127738,حمام الشط,Ben Arous,5.0,6.889637547296516,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B69090870616601,تيبار,Béja,25.8,31.030820979153408,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B93719080710322,‫المحرس‬,Sfax,12.4,5.785183568969694,Low Electrification (NTL),Economic-Thermal Deficit,High Thermal LST Stress
+11933810B77110081230007,بلخير,Gafsa,31.2,18.076690153146632,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B27365957956997,العامرة,Sfax,6.8,5.546586634441649,Low Electrification (NTL),Economic-Thermal Deficit,High Thermal LST Stress
+11933810B63201722786618,الكريب,Siliana,21.8,27.65572481705908,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B80970548575435,باب بحر,Tunis,1.6,2.19349274039355,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B4327996675990,الزهراء,Ben Arous,2.6,3.977902326126183,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B23225476199680,العمران,Tunis,6.3,4.890706908216027,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B16314159892818,مقرين,Ben Arous,3.6,3.448969602767347,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B99011573109347,بومهل البساتين,Ben Arous,4.1,5.3032502735233225,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B49298312402477,جربة ميدون,Médenine,11.5,20.76647005110023,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B14386581864910,حي الخضراء,Tunis,1.4,3.034325242678074,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B30705450500253,المرناقية,Manouba,7.8,13.197837801108834,Low Electrification (NTL),Economic-Thermal Deficit,Surface Water Deficit
+11933810B74832609224245,بنبلة,Monastir,6.4,8.551189036782105,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B54416453623,سيدي بوزيد الشرقية,Sidi Bouzid,21.8,23.540563421365324,High Thermal LST Stress,High Thermal Aridity,LST_Celsius_std
+11933810B98016623241881,سيدي ثابت,Ariana,9.1,5.9991542643177365,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B21257507323383,سيدي حسين,Tunis,9.4,5.944970775335372,Low Electrification (NTL),NTL_radiance_mean,Economic-Thermal Deficit
+11933810B7200177865373,سبيطلة,Kasserine,33.0,33.088834774144566,High Thermal LST Stress,Built-Environment Deficit,High Thermal Aridity
+11933810B17375886890417,حمام الأنف,Ben Arous,6.4,5.290240356879939,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B52074179872789,فريانة,Kasserine,31.5,33.05788912400649,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B3034727793195,تستور,Béja,25.5,31.66272014783469,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B37862088791511,حاجب العيون,Kairouan,36.6,34.6653217762965,High Thermal LST Stress,NDWI_std,Built-Environment Deficit
+11933810B10014638911734,حاسي الفريد,Kasserine,53.5,33.54852221105268,High Thermal LST Stress,NDBI_std,High Thermal Aridity
+11933810B29864184441707,بئر مشارقة,Zaghouan,15.8,9.353614487989324,Low Electrification (NTL),Economic-Thermal Deficit,Surface Water Deficit
+11933810B5291941008457,Jendouba Sud,Jendouba,10.7,22.14643433369265,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B48763821279010,Kerkennah,Sfax,8.9,7.365834028018884,High Thermal LST Stress,Economic-Thermal Deficit,Low Electrification (NTL)
+11933810B23318166280957,الروحية,Siliana,32.2,27.71647504250714,Low Building Density,Low Building Footprints,Low Road Connectivity
+11933810B792600527731,السيجومي,Tunis,11.5,0.1,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B49393262252767,أم العرائس,Gafsa,20.5,17.970671144707392,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B59766353296810,سليانة الشمالية,Siliana,16.8,28.60083212254979,Surface Water Deficit,LST_Celsius_std,SAVI_std
+11933810B38672190318546,ذهيبة,Tataouine,10.5,14.455241148674764,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B45404698681959,جومين,Bizerte,36.6,18.105187489829547,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B14634667217503,بومرداس,Mahdia,35.0,18.015372393619177,Low Electrification (NTL),Economic-Thermal Deficit,LST_Celsius_std
+11933810B855044538504,بني خيار,Nabeul,5.8,7.537335212132958,Surface Water Deficit,Low Vegetation Canopy,NDWI_std
+11933810B10530629108425,بوحجلة,Kairouan,32.7,35.21688016039432,High Thermal LST Stress,NDWI_std,Built-Environment Deficit
+11933810B94035776455507,الهوارية,Nabeul,16.0,7.151457640850271,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B85459320583034,صواف,Zaghouan,19.5,12.597427718327308,Surface Water Deficit,NDWI_std,Low Vegetation Canopy
+11933810B73279713716236,بئر الحفي,Sidi Bouzid,27.4,22.897182205912387,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B41984965215358,الجديدة,Manouba,11.9,14.420201095800175,Low Electrification (NTL),Economic-Thermal Deficit,Surface Water Deficit
+11933810B94695140482222,المحمدية,Ben Arous,7.1,4.051105946113045,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B14836095916482,القيروان الشمالية,Kairouan,20.8,34.1170060109868,LST_Celsius_std,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B63421014427866,الكاف الغربية,El Kef,21.9,34.37082226501388,Surface Water Deficit,NDBI_std,Low Vegetation Canopy
+11933810B49902378284824,نبر,El Kef,45.4,33.62503800669396,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B14406608577982,ملولش,Mahdia,30.9,22.051787150557505,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B90184807818123,منزل بوزيان,Sidi Bouzid,39.0,23.568462534094408,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B99005067592963,جمال,Monastir,7.4,7.227372530056441,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B7896937975348,بني خداش,Médenine,36.9,22.065570215516743,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B80105937964230,تبرسق,Béja,27.3,32.60000636428193,Surface Water Deficit,Low Vegetation Canopy,NDBI_std
+11933810B23550451682072,المكنين,Monastir,12.1,9.592103558977367,Low Electrification (NTL),Economic-Thermal Deficit,NDWI_std
+11933810B26778140305408,المنستير,Monastir,4.6,9.030383517559642,Low Electrification (NTL),Economic-Thermal Deficit,NTL_radiance_mean
+11933810B93469460723803,والد شامخ,Mahdia,36.9,20.22974556437939,High Thermal LST Stress,NDBI_std,Economic-Thermal Deficit
+11933810B66279865706920,قفصة الجنوبية,Gafsa,15.4,18.510484162278864,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B57085806890021,سيدي علوان,Mahdia,28.9,21.652618922464946,High Thermal LST Stress,High Thermal Aridity,NDBI_std
+11933810B48053950180724,الرقاب,Sidi Bouzid,23.7,23.004870519324804,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B22312000664115,نفزة,Béja,37.5,32.92215033605984,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B84544107883303,سيدي علي بن عون,Sidi Bouzid,31.0,23.057748729942205,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B88650874660140,سجنان,Bizerte,39.9,17.931597955367472,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B70866189338214,رادس,Ben Arous,4.3,4.4772546444294585,NTL_radiance_mean,Low Electrification (NTL),Economic-Thermal Deficit
+11933810B57309520880620,حمام الغزاز,Nabeul,16.0,7.983772444619218,Surface Water Deficit,NDWI_std,Low Vegetation Canopy
+11933810B56579355102022,تاكلسة,Nabeul,11.0,6.750708952163913,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B71477976393658,منزل الحبيب,Gabès,33.6,14.893490618708409,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B10318624738248,الحامة,Gabès,20.3,17.37723097664977,High Thermal LST Stress,High Thermal Aridity,Built-Environment Deficit
+11933810B21643194978673,مطماطة,Gabès,26.4,17.131295462732854,High Thermal LST Stress,High Thermal Aridity,High Urban Heat Stress
+11933810B54928628318578,منزل بوزلفة,Nabeul,7.8,6.474572037082432,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B10041539297974,نصر الله,Kairouan,35.1,35.627255817045665,High Thermal LST Stress,LST_Celsius_std,Built-Environment Deficit
+11933810B17792419290785,قليبية,Nabeul,10.9,9.073871114746416,Surface Water Deficit,Low Vegetation Canopy,Soil Vegetative Stress
+11933810B54717657919008,كسرى,Siliana,24.4,27.87530100336077,Surface Water Deficit,LST_Celsius_std,NDWI_std
+11933810B45961681846987,منزل تميم,Nabeul,10.2,8.450081896455796,Surface Water Deficit,LST_Celsius_std,Low Vegetation Canopy

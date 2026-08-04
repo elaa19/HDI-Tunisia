@@ -4,7 +4,7 @@ Phase 5 & Phase 6: Validation, Choropleth Mapping, and Leaflet.js Web Map Export
 1. Phase 5 Validation: Spatial ranking sanity check (Interior vs Coastal Governorates).
 2. Phase 6 Choropleth Mapping: Generates static maps (GeoPandas + Matplotlib)
    showing Délégation predictions, Governorate rates, and Aggregation Bias.
-3. Exports Leaflet.js interactive web map GeoJSON layers WITH ALL FEATURES:
+3. Exports Leaflet.js interactive web map GeoJSON layers WITH ALL FEATURES, SHAP DRIVERS & TRENDS:
    - data/processed/delegation_predictions.geojson
    - data/processed/gouvernorat_predictions.geojson
 """
@@ -36,7 +36,10 @@ def run_validation_and_mapping():
     print("=================================================================")
 
     # Load Datasets
-    del_pred_path = os.path.join(PROCESSED_DIR, "delegation_poverty_predictions.csv")
+    del_pred_path = os.path.join(PROCESSED_DIR, "delegation_poverty_trends.csv")
+    if not os.path.exists(del_pred_path):
+        del_pred_path = os.path.join(PROCESSED_DIR, "delegation_poverty_predictions.csv")
+
     gov_pred_path = os.path.join(PROCESSED_DIR, "governorate_poverty_composite.csv")
     adm2_geojson = os.path.join(BOUNDARIES_DIR, "tunisia_adm2_delegations.geojson")
     adm1_geojson = os.path.join(BOUNDARIES_DIR, "tunisia_adm1_governorates.geojson")
@@ -91,9 +94,20 @@ def run_validation_and_mapping():
     df_del_pred['gov_official_rate'] = df_del_pred['governorate_name'].map(gov_rate_map)
     df_del_pred['aggregation_bias'] = df_del_pred['y_pred_within_anchored'] - df_del_pred['gov_official_rate']
 
-    # Merge ALL columns into GeoDataFrames
-    gdf_del_merged = gdf_adm2[['delegation_id', 'geometry']].merge(df_del_pred, on='delegation_id', how='inner')
-    gdf_gov_merged = gdf_adm1[['governorate_id', 'geometry']].merge(df_gov_pred, on='governorate_id', how='inner')
+    # Attach Latin delegation name from label file
+    label_csv = pd.read_csv(os.path.join(BASE_DIR, "data", "tunisia_delegation_poverty_labels.csv"))
+    label_csv['code_str'] = label_csv['code'].astype(str)
+    code_to_latin_map = label_csv.set_index('code_str')['delegation'].to_dict()
+    df_del_pred['delegation_latin'] = df_del_pred['code_str'].map(code_to_latin_map)
+
+    # Merge ALL columns into GeoDataFrames cleanly
+    if 'geometry' in df_del_pred.columns:
+        df_del_pred = df_del_pred.drop(columns=['geometry'])
+    if 'geometry' in df_gov_pred.columns:
+        df_gov_pred = df_gov_pred.drop(columns=['geometry'])
+
+    gdf_del_merged = gdf_adm2.merge(df_del_pred, on='delegation_id', how='inner')
+    gdf_gov_merged = gdf_adm1.merge(df_gov_pred, on='governorate_id', how='inner')
 
     # Round float columns for compact web JSON formatting
     float_cols_del = gdf_del_merged.select_dtypes(include=[np.float64, np.float32]).columns

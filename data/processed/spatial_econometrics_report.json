@@ -1,0 +1,9 @@
+{
+  "n_units": 264,
+  "moran_i_official": 0.6846,
+  "moran_p_official": 0.0,
+  "moran_i_pred": 0.8506,
+  "moran_p_pred": 0.0,
+  "spatial_rho_coefficient": 6.8683,
+  "spatial_lag_r2": 0.6447
+}

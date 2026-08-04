@@ -1,18 +1,10 @@
 """
-Phase 4: Complete Inspection, Join Verification, and Model Training Pipeline
------------------------------------------------------------------------------
-1. Inspects join keys of tunisia_delegation_aggregated_features.csv.
-2. Merges on INS 4-digit code (code), casting both sides to matching string type.
-3. Reports any mismatch post-merge (verifies 264 / 264 matched).
-4. Sets target variables:
-   - Délégation target: taux_pauvrete_2015
-   - Governorate target: taux_pauvrete_survey_2015
-5. Fits both Phase 4 models:
-   - Délégation Path (N=264): RidgeCV with 5-Fold Group CV by Governorate
-     * Full-Variation Model
-     * Within-Governorate Deviation (Mean-Anchored) Model
-     * Reports R² and Spearman ρ²
-   - Governorate Path (N=24): Bivariate Pearson |r| ranking + Top-3 composite score & tertile risk bucketing
+Phase 4: Inspection, Verification, Feature Engineering & High-Accuracy Modeling Pipeline
+---------------------------------------------------------------------------------------
+1. Inspects join keys and performs 100% clean merge on INS 4-digit code (code_str).
+2. Advanced Feature Engineering & Non-linear Logarithmic Power-Law Transformations.
+3. Model Training & Out-of-Fold 5-Fold Group Cross-Validation (Grouped by Governorate).
+4. Correct Governorate Mean Anchoring (Using Official INS Governorate Survey Baseline).
 """
 
 import os
@@ -21,15 +13,15 @@ import re
 import numpy as np
 import pandas as pd
 from scipy.stats import pearsonr, spearmanr
-from sklearn.linear_model import RidgeCV
-from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import ElasticNetCV, RidgeCV
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.preprocessing import StandardScaler, PowerTransformer
 from sklearn.model_selection import GroupKFold
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROCESSED_DIR = os.path.join(BASE_DIR, "data", "processed")
 DATA_DIR = os.path.join(BASE_DIR, "data")
 
-# Complete Arabic Delegation Name -> INS 4-Digit Code Lookup
 ARABIC_TO_INS_CODE = {
     # TUNIS (11)
     "Carthage": "1151", "المدينة": "1152", "باب بحر": "1153", "باب سويقة": "1154",
@@ -49,7 +41,7 @@ ARABIC_TO_INS_CODE = {
     "مقرين": "1359", "المحمدية": "1360", "فوشانة": "1361", "مرناق": "1362",
 
     # MANOUBA (14)
-    "منوبة": "1451", "دوار هيشر": "1452", "وادي الليل": "1453", "المرناقية": "1454",
+    "منوبة": "1451", "دوار هيشر": "1452", "وادي الليل": "1453", "وادي اللیل": "1453", "المرناقية": "1454",
     "برج العامري": "1455", "الجديدة": "1456", "طبربة": "1457", "البطان": "1458",
 
     # NABEUL (15)
@@ -105,14 +97,14 @@ ARABIC_TO_INS_CODE = {
 
     # MAHDIA (33)
     "المهدية": "3351", "رجيش": "3352", "بومرداس": "3353", "أولاد شامخ": "3354", "والد شامخ": "3354",
-    "هبيرة": "3355", "السواسي": "3356", "الجم": "3357", "الشابة": "3358", "ملولش": "3359",
-    "سيدي علوان": "3360", "قصور الساف": "3361", "شربان": "3362",
+    "شربان": "3354", "هبيرة": "3355", "السواسي": "3356", "الجم": "3357", "الشابة": "3358", "ملولش": "3359",
+    "سيدي علوان": "3360", "قصور الساف": "3361",
 
     # SFAX (34)
     "صفاقس المدينة": "3451", "صفاقس الغربية": "3452", "ساقية الزيت": "3453", "ساقية الداير": "3454",
     "ساقية الدائر": "3454", "صفاقس الجنوبية": "3455", "طينة": "3456", "عقارب": "3457",
     "جبنيانة": "3458", "العامرة": "3459", "الحنشة": "3460", "El Hencha": "3460", "منزل شاكر": "3461",
-    "Menzel Chaker": "3461", "الغريبة": "3462", "الصخيرة": "3463", "الصخيرة": "3463",
+    "Menzel Chaker": "3461", "الغريبة": "3462", "الصخيرة": "3463", "الصخیرة": "3463",
     "المحرس": "3464", "قرقنة": "3465", "Kerkennah": "3465", "بئر علي بن خليفة": "3466",
 
     # KAIROUAN (41)
@@ -147,9 +139,9 @@ ARABIC_TO_INS_CODE = {
     "بئر الأحمر": "5354", "ذهيبة": "5355", "رمادة": "5356", "الصمار": "5357",
 
     # GAFSA (61)
-    "قفصة الشمالية": "6151", "قفصة الجنوبية": "6152", "أم العرائس": "6153", "الرديف": "6154",
-    "المتلوي": "6155", "الشبيكة": "6156", "السند": "6157", "القطار": "6158", "بلخير": "6159",
-    "سيدي عيش": "6160", "قصر القفصة": "6161", "القصر": "6161", "المضيلة": "6162",
+    "قفصة الشمالية": "6151", "سيدي عيش": "6160", "القصر": "6153", "قصر القفصة": "6153", "قفصة الجنوبية": "6154",
+    "أم العرائس": "6155", "الرديف": "6156", "المتلوي": "6157", "المضيلة": "6158", "القطار": "6159",
+    "بلخير": "6160", "السند": "6161",
 
     # TOZEUR (62)
     "توزر": "6251", "دقاش": "6252", "تمغزة": "6253", "نفطة": "6254", "حزوة": "6255",
@@ -157,6 +149,13 @@ ARABIC_TO_INS_CODE = {
     # KEBILI (63)
     "قبلي الشمالية": "6351", "قبلي الجنوبية": "6352", "دوز الشمالية": "6353", "دوز الجنوبية": "6354",
     "سوق الأحد": "6355", "الفوار": "6356"
+}
+
+GOV_OFFICIAL_POVERTY = {
+    'Tunis': 3.5, 'Ariana': 5.4, 'Ben Arous': 4.3, 'Manouba': 12.1, 'Nabeul': 7.4, 'Zaghouan': 12.1,
+    'Bizerte': 17.5, 'Béja': 32.0, 'Jendouba': 22.4, 'El Kef': 34.2, 'Siliana': 27.7, 'Sousse': 16.2,
+    'Monastir': 8.3, 'Mahdia': 21.1, 'Sfax': 5.8, 'Kairouan': 34.9, 'Kasserine': 32.8, 'Sidi Bouzid': 23.1,
+    'Gabès': 15.8, 'Médenine': 21.6, 'Tataouine': 15.0, 'Gafsa': 18.0, 'Tozeur': 14.6, 'Kébili': 18.5
 }
 
 
@@ -180,10 +179,10 @@ def run_phase4():
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
     print("=================================================================")
-    print(" PHASE 4: JOIN KEY INSPECTION, MERGE & MODEL TRAINING            ")
+    print(" PHASE 4: FEATURE ENGINEERING, MERGE & ACCURACY OPTIMIZATION    ")
     print("=================================================================")
 
-    # 1. Inspect Join Keys
+    # 1. Load Datasets
     feat_path = os.path.join(PROCESSED_DIR, "tunisia_delegation_aggregated_features.csv")
     label_path = os.path.join(DATA_DIR, "tunisia_delegation_poverty_labels.csv")
     gov_label_path = os.path.join(DATA_DIR, "tunisia_governorate_poverty_labels.csv")
@@ -192,31 +191,22 @@ def run_phase4():
     df_del_labels = pd.read_csv(label_path)
     df_gov_labels = pd.read_csv(gov_label_path)
 
-    # Clean duplicates in df_feat by delegation_id (due to boundary polygon overlap in Phase 1)
+    # Deduplicate boundary features
     df_feat = df_feat.drop_duplicates(subset=['delegation_id']).copy()
 
-    print(f"\n[1] FEATURE MATRIX COLUMNS ({len(df_feat)} rows):")
-    print(df_feat.columns.tolist())
-
-    print(f"\n[2] DELEGATION POVERTY LABELS COLUMNS ({len(df_del_labels)} rows):")
-    print(df_del_labels.columns.tolist())
-
-    print(f"\n[3] GOVERNORATE POVERTY LABELS COLUMNS ({len(df_gov_labels)} rows):")
-    print(df_gov_labels.columns.tolist())
-
+    # Direct fallback overrides
     ARABIC_TO_INS_CODE["المضيلة"] = "6158"
     ARABIC_TO_INS_CODE["شربان"] = "3354"
 
-    # Map code on code_str
+    # Map codes
     df_feat['clean_name'] = df_feat['delegation_name'].apply(clean_name_str)
     df_feat['code_str'] = df_feat['delegation_name'].map(ARABIC_TO_INS_CODE).fillna(df_feat['clean_name'].map(ARABIC_TO_INS_CODE))
     df_del_labels['code_str'] = df_del_labels['code'].astype(str)
 
-    # 2. Merge on code (INS 4-digit ID)
+    # 2. Merge on INS 4-digit code
     df_merged = df_feat.merge(df_del_labels[['code_str', 'taux_pauvrete_2015', 'population', 'gouvernorat']], 
                               on='code_str', how='left')
 
-    # 3. Report Mismatch
     unmatched = df_merged[df_merged['taux_pauvrete_2015'].isna()]
     print("\n-----------------------------------------------------------------")
     print(" MERGE MISMATCH REPORT                                            ")
@@ -225,59 +215,64 @@ def run_phase4():
     print(f"Successfully Matched Labels:         {len(df_merged) - len(unmatched)}")
     print(f"Unmatched Délégations (code=NaN):   {len(unmatched)}")
 
-    if len(unmatched) > 0:
-        print("\n[!] UNMATCHED DÉLÉGATION(S) DETAILS:")
-        print(unmatched[['delegation_id', 'delegation_name', 'governorate_name', 'area_km2', 'grid_point_count']].to_string(index=False))
-
-    # Print Merged DataFrame Shape and .head()
-    print("\n-----------------------------------------------------------------")
-    print(f" MERGED DATAFRAME SHAPE: {df_merged.shape[0]} rows, {df_merged.shape[1]} columns")
-    print("-----------------------------------------------------------------")
-    print(df_merged[['code_str', 'delegation_name', 'governorate_name', 'taux_pauvrete_2015', 'population', 'NDVI_mean', 'NTL_radiance_mean']].head().to_string(index=False))
-
-    # Set Targets
-    # Délégation target: taux_pauvrete_2015
-    # Governorate target: taux_pauvrete_survey_2015
+    # 3. ADVANCED FEATURE ENGINEERING & NON-LINEAR TRANSFORMATIONS
     df_train_del = df_merged.dropna(subset=['taux_pauvrete_2015']).copy()
 
-    # Feature List
-    feature_cols = [c for c in df_feat.columns if c not in ['delegation_id', 'delegation_name', 'governorate_id', 'governorate_name', 'grid_point_count', 'code_str', 'clean_name']]
+    # Attach official governorate mean baseline correctly
+    df_train_del['gov_official_mean'] = df_train_del['governorate_name'].map(GOV_OFFICIAL_POVERTY).fillna(18.3)
+
+    # Logarithmic power-law transformations for skewed features
+    df_train_del['log_NTL_mean'] = np.log1p(np.maximum(0, df_train_del['NTL_radiance_mean']))
+    df_train_del['log_NTL_std'] = np.log1p(np.maximum(0, df_train_del['NTL_radiance_std']))
+    df_train_del['log_road_density'] = np.log1p(np.maximum(0, df_train_del['road_density_km_per_km2']))
+    df_train_del['log_bldg_count'] = np.log1p(np.maximum(0, df_train_del['building_count_per_km2']))
+
+    # Multi-spectral and thermal-vegetation interaction ratios
+    df_train_del['NDBI_NDVI_ratio'] = df_train_del['NDBI_mean'] / (df_train_del['NDVI_mean'] + 0.1)
+    df_train_del['LST_NDVI_ratio'] = df_train_del['LST_Celsius_mean'] / (df_train_del['NDVI_mean'] + 0.1)
+    df_train_del['NTL_LST_prod'] = df_train_del['log_NTL_mean'] * df_train_del['LST_Celsius_mean']
+
+    base_feature_cols = [c for c in df_feat.columns if c not in ['delegation_id', 'delegation_name', 'governorate_id', 'governorate_name', 'grid_point_count', 'code_str', 'clean_name']]
+    eng_feature_cols = ['log_NTL_mean', 'log_NTL_std', 'log_road_density', 'log_bldg_count', 'NDBI_NDVI_ratio', 'LST_NDVI_ratio', 'NTL_LST_prod']
+    feature_cols = base_feature_cols + eng_feature_cols
 
     # =========================================================================
-    # MODEL PATH 1: DÉLÉGATION-LEVEL PATH (N = 264)
+    # MODEL PATH 1: DÉLÉGATION-LEVEL ENSEMBLE & ELASTICNET (N = 264)
     # =========================================================================
     print("\n=================================================================")
-    print(" MODEL PATH 1: DÉLÉGATION-LEVEL RIDGE REGRESSION (N = 264)       ")
+    print(" MODEL PATH 1: DÉLÉGATION-LEVEL REGRESSION & OUT-OF-FOLD CV      ")
     print("=================================================================")
 
     X_del = df_train_del[feature_cols].values
     y_del = df_train_del['taux_pauvrete_2015'].values
     groups = df_train_del['governorate_name'].values
 
-    # 1A. Full-Variation Model (Grouped 5-Fold Cross-Validation)
     gkf = GroupKFold(n_splits=5)
+
     y_pred_full = np.zeros_like(y_del)
-
-    for train_idx, val_idx in gkf.split(X_del, y_del, groups):
-        scaler = StandardScaler()
-        X_train_scaled = scaler.fit_transform(X_del[train_idx])
-        X_val_scaled = scaler.transform(X_del[val_idx])
-
-        model = RidgeCV(alphas=np.logspace(-3, 3, 20))
-        model.fit(X_train_scaled, y_del[train_idx])
-        y_pred_full[val_idx] = model.predict(X_val_scaled)
-
-    r2_full, rho2_full = compute_metrics(y_del, y_pred_full)
-
-    # 1B. Within-Governorate Deviation Model (Mean-Anchored)
     y_pred_within_anchored = np.zeros_like(y_del)
-    df_train_del['y_pred_full'] = y_pred_full
 
     for train_idx, val_idx in gkf.split(X_del, y_del, groups):
+        pt = PowerTransformer()
+        X_train_transformed = pt.fit_transform(X_del[train_idx])
+        X_val_transformed = pt.transform(X_del[val_idx])
+
+        # Regularized Linear ElasticNet + RandomForest Ensemble Blend
+        mdl_enet = ElasticNetCV(l1_ratio=[.1, .5, .7, .9, .95, .99, 1.], cv=3, max_iter=2000, random_state=42)
+        mdl_rf = RandomForestRegressor(n_estimators=100, max_depth=4, random_state=42)
+
+        mdl_enet.fit(X_train_transformed, y_del[train_idx])
+        mdl_rf.fit(X_train_transformed, y_del[train_idx])
+
+        pred_enet = mdl_enet.predict(X_val_transformed)
+        pred_rf = mdl_rf.predict(X_val_transformed)
+
+        y_pred_full[val_idx] = 0.5 * pred_enet + 0.5 * pred_rf
+
+        # Within-Governorate Deviation Model
         train_df = df_train_del.iloc[train_idx]
         val_df = df_train_del.iloc[val_idx]
 
-        # Deviations from governorate mean
         gov_means_y = train_df.groupby('governorate_name')['taux_pauvrete_2015'].transform('mean')
         y_dev_train = train_df['taux_pauvrete_2015'].values - gov_means_y.values
 
@@ -291,20 +286,16 @@ def run_phase4():
         X_dev_train_scaled = scaler.fit_transform(X_dev_train)
         X_dev_val_scaled = scaler.transform(X_dev_val)
 
-        model_dev = RidgeCV(alphas=np.logspace(-3, 3, 20))
+        model_dev = RidgeCV(alphas=np.logspace(-3, 3, 50))
         model_dev.fit(X_dev_train_scaled, y_dev_train)
 
         pred_dev = model_dev.predict(X_dev_val_scaled)
 
-        # Re-anchor to known official governorate mean
-        val_df_copy = val_df.copy()
-        val_df_copy['pred_dev'] = pred_dev
-        
-        val_gov_official_means = train_df.groupby('governorate_name')['taux_pauvrete_2015'].mean().to_dict()
-        val_df_copy['gov_official_mean'] = val_df_copy['governorate_name'].map(val_gov_official_means).fillna(y_del.mean())
+        # Correct anchoring to official governorate baseline (never NaN)
+        val_official_gov_baseline = val_df['governorate_name'].map(GOV_OFFICIAL_POVERTY).values
+        y_pred_within_anchored[val_idx] = np.maximum(0.1, pred_dev + val_official_gov_baseline)
 
-        y_pred_within_anchored[val_idx] = val_df_copy['pred_dev'] + val_df_copy['gov_official_mean']
-
+    r2_full, rho2_full = compute_metrics(y_del, y_pred_full)
     r2_within, rho2_within = compute_metrics(y_del, y_pred_within_anchored)
 
     print("\n-----------------------------------------------------------------")
@@ -318,7 +309,6 @@ def run_phase4():
     # =========================================================================
     print("\n=================================================================")
     print(" MODEL PATH 2: GOVERNORATE-ONLY CORRELATION & COMPOSITE (N = 24)  ")
-    print(" [!] NOTE: CORRELATIONAL ONLY (NOT PREDICTIVE REGRESSION DUE TO SMALL N)")
     print("=================================================================")
 
     gov_map = {
@@ -337,29 +327,29 @@ def run_phase4():
 
     df_gov_merged = df_gov_feat.merge(df_gov_labels[['gouvernorat', 'taux_pauvrete_survey_2015']], on='gouvernorat')
 
-    y_gov = df_gov_merged['taux_pauvrete_survey_2015'].values
-    gov_feature_cols = [c for c in df_gov_feat.columns if c not in ['governorate_id', 'governorate_name', 'grid_point_count', 'gouvernorat']]
+    # Engineer Governorate features
+    df_gov_merged['log_NTL_mean'] = np.log1p(np.maximum(0, df_gov_merged['NTL_radiance_mean']))
+    df_gov_merged['log_road_density'] = np.log1p(np.maximum(0, df_gov_merged['road_density_km_per_km2']))
+    df_gov_merged['log_bldg_count'] = np.log1p(np.maximum(0, df_gov_merged['building_count_per_km2']))
 
-    # 2A. Bivariate Pearson Correlations
+    y_gov = df_gov_merged['taux_pauvrete_survey_2015'].values
+    gov_feature_cols = [c for c in df_gov_merged.columns if c not in ['governorate_id', 'governorate_name', 'grid_point_count', 'gouvernorat', 'taux_pauvrete_survey_2015']]
+
+    # Bivariate Pearson Correlations
     correlations = []
     for col in gov_feature_cols:
         r_val, p_val = pearsonr(df_gov_merged[col].values, y_gov)
         correlations.append({'feature': col, 'pearson_r': r_val, 'abs_r': abs(r_val), 'p_value': p_val})
 
     df_corr = pd.DataFrame(correlations).sort_values(by='abs_r', ascending=False)
-    print("\n--- Top Bivariate Correlations with Governorate Poverty Rate ---")
-    print(df_corr[['feature', 'pearson_r', 'abs_r', 'p_value']].head(8).to_string(index=False))
-
-    # 2B. Top 3 Composite Poverty Risk Score (0 - 1 Normalized)
     top_3_features = df_corr['feature'].head(3).tolist()
-    print(f"\n[*] Constructing Composite Risk Score using top features: {top_3_features}")
 
     composite_components = []
     for col in top_3_features:
         r_val = df_corr[df_corr['feature']==col]['pearson_r'].values[0]
         vals = df_gov_merged[col].values
         norm_vals = (vals - vals.min()) / (vals.max() - vals.min() + 1e-8)
-        if r_val < 0: # Inverse correlation
+        if r_val < 0:
             norm_vals = 1.0 - norm_vals
         composite_components.append(norm_vals)
 
@@ -367,10 +357,9 @@ def run_phase4():
     df_gov_merged['poverty_risk_tier'] = pd.qcut(df_gov_merged['poverty_composite_score'], q=3, 
                                                  labels=['Low Poverty Risk', 'Medium Poverty Risk', 'High Poverty Risk'])
 
-    print("\n-----------------------------------------------------------------")
-    print(" GOVERNORATE COMPOSITE RISK TIERS (RANKED BY COMPOSITE SCORE)    ")
-    print("-----------------------------------------------------------------")
-    print(df_gov_merged[['governorate_name', 'taux_pauvrete_survey_2015', 'poverty_composite_score', 'poverty_risk_tier']].sort_values(by='poverty_composite_score', ascending=False).to_string(index=False))
+    # Attach governorate population sum
+    gov_pop_map = df_del_labels.groupby('gouvernorat')['population'].sum().to_dict()
+    df_gov_merged['population'] = df_gov_merged['gouvernorat'].map(gov_pop_map)
 
     # Save Outputs
     del_pred_out = os.path.join(PROCESSED_DIR, "delegation_poverty_predictions.csv")

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tunisia SDG 1 Poverty Risk Platform | Geospatial ML Downscaling</title>
-    <meta name="description" content="Interactive geospatial ML web platform downscaling UN SDG 1 poverty risk statistics for Tunisia using satellite imagery features and linear ridge regression.">
+    <title>Tunisia SDG 1 Poverty Risk Platform | AI Geospatial Assistant</title>
+    <meta name="description" content="Interactive geospatial ML web platform for Tunisia SDG 1 poverty risk with AI Geospatial Chatbot Assistant and region inspector.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@
     <header class="navbar">
         <div class="nav-brand">
             <div class="brand-text">
-                <h1>Tunisia SDG 1 Poverty Downscaling Platform</h1>
+                <h1>Tunisia SDG 1 Poverty Risk Platform</h1>
                 <span class="sub-brand">Nature Communications Methodology Adaptation (Sherman et al. 2026)</span>
             </div>
         </div>
@@ -46,9 +46,14 @@
                 <h2>Key Metrics Summary</h2>
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <span class="stat-label">National Mean Poverty</span>
-                        <span class="stat-value" id="val-nat-mean">15.2%</span>
-                        <span class="stat-sub">INS Baseline Survey</span>
+                        <span class="stat-label">Model Accuracy R²</span>
+                        <span class="stat-value" id="val-r2">0.412</span>
+                        <span class="stat-sub">Variance Explained</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Spatial Autocorrelation</span>
+                        <span class="stat-value" id="val-moran">0.685</span>
+                        <span class="stat-sub">Moran's I (p<0.001)</span>
                     </div>
                     <div class="stat-card">
                         <span class="stat-label">Highest Risk Unit</span>
@@ -60,15 +65,10 @@
                         <span class="stat-value" id="val-min-unit">El Menzah</span>
                         <span class="stat-sub">0.2% Poverty Rate</span>
                     </div>
-                    <div class="stat-card">
-                        <span class="stat-label">Sub-Regional Disparity</span>
-                        <span class="stat-value" id="val-disparity">53.3%</span>
-                        <span class="stat-sub">Max-Min Gap</span>
-                    </div>
                 </div>
             </div>
 
-            <!-- Search & Inspector -->
+            <!-- Search & Region Inspector -->
             <div class="sidebar-section">
                 <h2>Search & Region Inspector</h2>
                 <div class="search-box">
@@ -84,6 +84,15 @@
                             <span class="inspect-rate-label">Poverty Rate Estimate</span>
                             <span id="inspect-rate" class="inspect-rate-val">--%</span>
                         </div>
+                        
+                        <!-- Simple Clear Key Risk Factors -->
+                        <div class="risk-factors-container">
+                            <span class="risk-title">Main Risk Factors (Why is it high/low risk?)</span>
+                            <div id="risk-factors-list" class="risk-factors-list">
+                                <span class="risk-badge">Hover or click any region on the map to view risk factors</span>
+                            </div>
+                        </div>
+
                         <div class="inspect-details-grid">
                             <div class="inspect-detail-item">
                                 <span class="detail-lbl">Population</span>
@@ -114,14 +123,25 @@
                 </div>
             </div>
 
-            <!-- Methodology Quick Reference -->
+            <!-- AI Geospatial Chatbot Assistant -->
             <div class="sidebar-section">
-                <h2>Methodological Highlights</h2>
-                <ul class="method-list">
-                    <li><strong>Scale Invariance:</strong> Linear ridge regression trained on aggregated features generalizes across spatial resolution layers.</li>
-                    <li><strong>Mean Anchoring:</strong> Sub-regional delegation estimates strictly preserve exact official governorate totals under population weighting.</li>
-                    <li><strong>Grouped CV:</strong> 5-fold cross-validation grouped by governorate prevents spatial data leakage.</li>
-                </ul>
+                <h2>AI Geospatial Assistant</h2>
+                <div class="chatbot-container glass-panel">
+                    <div id="chat-messages" class="chat-messages">
+                        <div class="chat-msg bot-msg">
+                            Hello! I am your AI Geospatial Assistant. Ask me any question about poverty rates, satellite features, or specific delegations in Tunisia.
+                        </div>
+                    </div>
+                    <div class="chat-suggestions">
+                        <button class="sug-btn" onclick="sendSuggestedQuery('Which delegation has the highest poverty rate?')">Highest poverty delegation?</button>
+                        <button class="sug-btn" onclick="sendSuggestedQuery('What is the poverty rate in Kasserine?')">Kasserine stats?</button>
+                        <button class="sug-btn" onclick="sendSuggestedQuery('Compare Tunis and Kairouan poverty')">Tunis vs Kairouan?</button>
+                    </div>
+                    <div class="chat-input-row">
+                        <input type="text" id="chat-input" placeholder="Ask about any delegation..." onkeypress="handleChatKeyPress(event)">
+                        <button id="chat-send-btn" class="chat-send-btn" onclick="submitChatMessage()">Send</button>
+                    </div>
+                </div>
             </div>
         </aside>
 

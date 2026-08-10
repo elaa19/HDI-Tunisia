@@ -4,10 +4,33 @@
 
 let map;
 let currentLayerName = 'delegation'; // 'delegation' or 'gouvernorat'
+let currentYear = '2026'; // '2015', '2020', or '2026'
 let geojsonLayer;
 let delegationData = null;
 let gouvernoratData = null;
 let currentSelectedProps = null;
+
+// Helper to extract poverty rate for current selected year
+function getPovertyRate(props) {
+    if (!props) return 0;
+    if (currentYear === '2015') {
+        let r = props.poverty_2015 !== undefined ? props.poverty_2015 :
+                props.taux_pauvrete_2015 !== undefined ? props.taux_pauvrete_2015 :
+                props.taux_pauvrete_survey_2015;
+        return r !== undefined ? Number(r) : 0;
+    } else if (currentYear === '2020') {
+        let r = props.poverty_2020 !== undefined ? props.poverty_2020 :
+                props.poverty_projected_2020;
+        return r !== undefined ? Number(r) : (getPovertyRate({...props}, '2015'));
+    } else {
+        // 2026 Projection / Downscaled ML
+        let r = props.poverty_2026 !== undefined ? props.poverty_2026 :
+                props.poverty_2024 !== undefined ? props.poverty_2024 :
+                props.y_pred_within_anchored !== undefined ? props.y_pred_within_anchored :
+                props.taux_pauvrete_2015;
+        return r !== undefined ? Number(r) : 0;
+    }
+}
 
 // Color scale for poverty rates (%)
 function getPovertyColor(rate) {
@@ -20,12 +43,7 @@ function getPovertyColor(rate) {
 
 // Style function for GeoJSON features
 function styleFeature(feature) {
-    let rate = 0;
-    if (currentLayerName === 'delegation') {
-        rate = feature.properties.taux_pauvrete_2015 || feature.properties.y_pred_within_anchored || 0;
-    } else {
-        rate = feature.properties.taux_pauvrete_survey_2015 || feature.properties.poverty_rate_official || 0;
-    }
+    let rate = getPovertyRate(feature.properties);
 
     return {
         fillColor: getPovertyColor(rate),
@@ -146,6 +164,15 @@ function updateInspector(props) {
     let biasEl = document.getElementById('inspect-bias');
     let riskBox = document.getElementById('risk-factors-list');
 
+    // Update inspector rate label to show current year
+    let rateLbl = document.querySelector('.inspect-rate-label');
+    if (rateLbl) {
+        rateLbl.innerText = `Poverty Rate Estimate (${currentYear})`;
+    }
+
+    let rate = getPovertyRate(props);
+    rateEl.innerText = rate.toFixed(1) + '%';
+
     // Title and Governorate badge
     if (currentLayerName === 'delegation') {
         let latinName = props.delegation_latin || props.delegation || '';
@@ -153,17 +180,11 @@ function updateInspector(props) {
         titleEl.innerText = latinName ? `${latinName} (${arName})` : arName;
         govEl.innerText = props.governorate_name || props.gouvernorat || 'ADM2';
         
-        let rate = props.taux_pauvrete_2015 || props.y_pred_within_anchored || 0;
-        rateEl.innerText = rate.toFixed(1) + '%';
-        
         let bias = props.aggregation_bias || 0;
         biasEl.innerText = (bias >= 0 ? '+' : '') + bias.toFixed(1) + ' %p';
     } else {
         titleEl.innerText = props.governorate_name || props.gouvernorat || 'Governorate';
         govEl.innerText = props.poverty_risk_tier || 'ADM1';
-        
-        let rate = props.taux_pauvrete_survey_2015 || props.poverty_rate_official || 0;
-        rateEl.innerText = rate.toFixed(1) + '%';
         
         let composite = props.poverty_composite_score || 0;
         biasEl.innerText = 'Score ' + composite.toFixed(3);
@@ -244,8 +265,8 @@ function generateDynamicBotResponse(userQuery) {
     // Intent 1: Ranking Queries (Poorest / Highest Poverty)
     if (q.includes('poorest') || q.includes('highest poverty') || q.includes('top risk') || q.includes('most vulnerable') || q.includes('highest')) {
         let sorted = [...features].sort((a, b) => {
-            let rA = a.properties.y_pred_within_anchored || a.properties.taux_pauvrete_2015 || 0;
-            let rB = b.properties.y_pred_within_anchored || b.properties.taux_pauvrete_2015 || 0;
+            let rA = getPovertyRate(a.properties);
+            let rB = getPovertyRate(b.properties);
             return rB - rA;
         });
 
@@ -253,17 +274,17 @@ function generateDynamicBotResponse(userQuery) {
             let p = f.properties;
             let name = p.delegation_latin || p.delegation_name || 'Delegation';
             let gov = p.governorate_name || p.gouvernorat;
-            let rate = (p.taux_pauvrete_2015 || p.y_pred_within_anchored || 0).toFixed(1);
+            let rate = getPovertyRate(p).toFixed(1);
             return `<strong>${i + 1}. ${name}</strong> (${gov}): ${rate}%`;
         }).join('<br>');
 
-        return `Top 5 Highest Poverty Risk Delegations in Tunisia:<br>${top5}`;
+        return `Top 5 Highest Poverty Risk Delegations in Tunisia (${currentYear}):<br>${top5}`;
     }
 
     if (q.includes('lowest poverty') || q.includes('richest') || q.includes('wealthiest') || q.includes('least poor') || q.includes('lowest')) {
         let sorted = [...features].sort((a, b) => {
-            let rA = a.properties.y_pred_within_anchored || a.properties.taux_pauvrete_2015 || 0;
-            let rB = b.properties.y_pred_within_anchored || b.properties.taux_pauvrete_2015 || 0;
+            let rA = getPovertyRate(a.properties);
+            let rB = getPovertyRate(b.properties);
             return rA - rB;
         });
 
@@ -271,11 +292,11 @@ function generateDynamicBotResponse(userQuery) {
             let p = f.properties;
             let name = p.delegation_latin || p.delegation_name || 'Delegation';
             let gov = p.governorate_name || p.gouvernorat;
-            let rate = (p.y_pred_within_anchored || p.taux_pauvrete_2015 || 0).toFixed(1);
+            let rate = getPovertyRate(p).toFixed(1);
             return `<strong>${i + 1}. ${name}</strong> (${gov}): ${rate}%`;
         }).join('<br>');
 
-        return `Top 5 Lowest Poverty Delegations in Tunisia:<br>${low5}`;
+        return `Top 5 Lowest Poverty Delegations in Tunisia (${currentYear}):<br>${low5}`;
     }
 
     // Intent 2: Comparison Queries (Compare X and Y)
@@ -299,12 +320,12 @@ function generateDynamicBotResponse(userQuery) {
         if (matches.length >= 2) {
             let p1 = matches[0].properties;
             let p2 = matches[1].properties;
-            let rate1 = (p1.y_pred_within_anchored || p1.taux_pauvrete_2015 || 0).toFixed(1);
-            let rate2 = (p2.y_pred_within_anchored || p2.taux_pauvrete_2015 || 0).toFixed(1);
+            let rate1 = getPovertyRate(p1).toFixed(1);
+            let rate2 = getPovertyRate(p2).toFixed(1);
             let name1 = p1.delegation_latin || p1.delegation_name;
             let name2 = p2.delegation_latin || p2.delegation_name;
 
-            return `<strong>Comparison:</strong><br>• <strong>${name1}</strong> (${p1.governorate_name}): <strong>${rate1}%</strong> poverty rate.<br>• <strong>${name2}</strong> (${p2.governorate_name}): <strong>${rate2}%</strong> poverty rate.<br>Gap: <strong>${Math.abs(rate1 - rate2).toFixed(1)} percentage points</strong>.`;
+            return `<strong>Comparison (${currentYear}):</strong><br>• <strong>${name1}</strong> (${p1.governorate_name}): <strong>${rate1}%</strong> poverty rate.<br>• <strong>${name2}</strong> (${p2.governorate_name}): <strong>${rate2}%</strong> poverty rate.<br>Gap: <strong>${Math.abs(rate1 - rate2).toFixed(1)} percentage points</strong>.`;
         }
     }
 
@@ -327,7 +348,7 @@ function generateDynamicBotResponse(userQuery) {
         let firstMatch = matchedFeatures[0].properties;
         let name = firstMatch.delegation_latin || firstMatch.delegation_name;
         let gov = firstMatch.governorate_name || firstMatch.gouvernorat;
-        let rate = (firstMatch.y_pred_within_anchored || firstMatch.taux_pauvrete_2015 || 0).toFixed(1);
+        let rate = getPovertyRate(firstMatch).toFixed(1);
         let pop = firstMatch.population ? Number(firstMatch.population).toLocaleString() : 'N/A';
         let factors = getDistinctRiskFactors(firstMatch);
 
@@ -343,11 +364,11 @@ function generateDynamicBotResponse(userQuery) {
         }
 
         if (matchedFeatures.length === 1) {
-            return `<strong>${name}</strong> (${gov}):<br>• Downscaled Poverty Rate: <strong>${rate}%</strong><br>• Population: <strong>${pop}</strong><br>• Main Risk Factors:<br>  1. ${factors[0]}<br>  2. ${factors[1]}<br>  3. ${factors[2]}`;
+            return `<strong>${name}</strong> (${gov}):<br>• Poverty Rate (${currentYear}): <strong>${rate}%</strong><br>• Population: <strong>${pop}</strong><br>• Main Risk Factors:<br>  1. ${factors[0]}<br>  2. ${factors[1]}<br>  3. ${factors[2]}`;
         } else {
-            let govRates = matchedFeatures.map(f => (f.properties.y_pred_within_anchored || f.properties.taux_pauvrete_2015 || 0));
+            let govRates = matchedFeatures.map(f => getPovertyRate(f.properties));
             let meanGovRate = (govRates.reduce((a,b)=>a+b,0) / govRates.length).toFixed(1);
-            return `<strong>${gov} Governorate</strong> (${matchedFeatures.length} delegations):<br>• Average Poverty Rate: <strong>${meanGovRate}%</strong><br>• Highlighted Unit: <strong>${name}</strong> (${rate}% poverty rate, ${pop} pop).<br>• Key Risk Factors:<br>  1. ${factors[0]}<br>  2. ${factors[1]}<br>  3. ${factors[2]}`;
+            return `<strong>${gov} Governorate</strong> (${matchedFeatures.length} delegations):<br>• Average Poverty Rate (${currentYear}): <strong>${meanGovRate}%</strong><br>• Highlighted Unit: <strong>${name}</strong> (${rate}% poverty rate, ${pop} pop).<br>• Key Risk Factors:<br>  1. ${factors[0]}<br>  2. ${factors[1]}<br>  3. ${factors[2]}`;
         }
     }
 
@@ -406,9 +427,11 @@ function renderLayer() {
     if (dataToRender.features && dataToRender.features.length > 0) {
         updateInspector(dataToRender.features[0].properties);
     }
+
+    updateSummaryStats();
 }
 
-// Switch Active Layer
+// Switch Active Layer (ADM2 vs ADM1)
 function switchLayer(layerName) {
     currentLayerName = layerName;
 
@@ -416,6 +439,72 @@ function switchLayer(layerName) {
     document.getElementById('btn-gouvernorat').classList.toggle('active', layerName === 'gouvernorat');
 
     renderLayer();
+}
+
+// Switch Active Year (2015, 2020, 2026)
+function switchYear(year) {
+    currentYear = year;
+
+    let b15 = document.getElementById('btn-year-2015');
+    let b20 = document.getElementById('btn-year-2020');
+    let b26 = document.getElementById('btn-year-2026');
+
+    if (b15) b15.classList.toggle('active', year === '2015');
+    if (b20) b20.classList.toggle('active', year === '2020');
+    if (b26) b26.classList.toggle('active', year === '2026');
+
+    if (geojsonLayer) {
+        geojsonLayer.setStyle(styleFeature);
+    }
+
+    if (currentSelectedProps) {
+        updateInspector(currentSelectedProps);
+    }
+
+    updateSummaryStats();
+}
+
+// Recalculate and update sidebar key metrics cards dynamically for active year
+function updateSummaryStats() {
+    let data = currentLayerName === 'delegation' ? delegationData : gouvernoratData;
+    if (!data || !data.features || data.features.length === 0) return;
+
+    let features = data.features;
+
+    let highest = features[0];
+    let lowest = features[0];
+    let maxRate = getPovertyRate(highest.properties);
+    let minRate = getPovertyRate(lowest.properties);
+
+    for (let f of features) {
+        let r = getPovertyRate(f.properties);
+        if (r > maxRate) {
+            maxRate = r;
+            highest = f;
+        }
+        if (r < minRate) {
+            minRate = r;
+            lowest = f;
+        }
+    }
+
+    let maxEl = document.getElementById('val-max-unit');
+    if (maxEl) {
+        let p = highest.properties;
+        let name = p.delegation_latin || p.delegation_name || p.governorate_name || p.gouvernorat;
+        maxEl.innerText = name;
+        let subEl = maxEl.parentElement.querySelector('.stat-sub');
+        if (subEl) subEl.innerText = `${maxRate.toFixed(1)}% Poverty Rate (${currentYear})`;
+    }
+
+    let minEl = document.getElementById('val-min-unit');
+    if (minEl) {
+        let p = lowest.properties;
+        let name = p.delegation_latin || p.delegation_name || p.governorate_name || p.gouvernorat;
+        minEl.innerText = name;
+        let subEl = minEl.parentElement.querySelector('.stat-sub');
+        if (subEl) subEl.innerText = `${minRate.toFixed(1)}% Poverty Rate (${currentYear})`;
+    }
 }
 
 // Fixed Search Filter Logic

@@ -27,7 +27,13 @@
             </div>
         </div>
         <div class="nav-controls">
-            <div class="layer-toggle-group">
+            <div class="toggle-group year-toggle-group">
+                <span class="control-label">Year:</span>
+                <button id="btn-year-2015" class="toggle-btn year-btn" onclick="switchYear('2015')">2015</button>
+                <button id="btn-year-2020" class="toggle-btn year-btn" onclick="switchYear('2020')">2020</button>
+                <button id="btn-year-2026" class="toggle-btn year-btn active" onclick="switchYear('2026')">2026</button>
+            </div>
+            <div class="toggle-group layer-toggle-group">
                 <button id="btn-delegation" class="toggle-btn active" onclick="switchLayer('delegation')">
                     Fine Delegation (ADM2)
                 </button>

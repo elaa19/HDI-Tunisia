@@ -45,9 +45,13 @@ def run_multitemporal_trends():
         -(0.12 * df_del['ntl_annual_growth_pct'] + 0.08 * df_del['built_growth_pct'] + np.random.normal(0, 0.05, n_units)), 3
     )
 
-    # 4. 2025 & 2030 SDG 1 Poverty Projections
+    # 4. 2015, 2020, 2026, 2025 & 2030 SDG 1 Poverty Projections
     poverty_base_2015 = df_del['taux_pauvrete_2015'].values
     poverty_pred_2021 = df_del['y_pred_within_anchored'].values
+
+    df_del['poverty_2015'] = np.round(poverty_base_2015, 1)
+    df_del['poverty_2020'] = np.round(np.maximum(0.1, poverty_base_2015 + 5 * df_del['poverty_reduction_rate_annual']), 1)
+    df_del['poverty_2026'] = np.round(np.maximum(0.1, poverty_pred_2021 + 5 * df_del['poverty_reduction_rate_annual']), 1)
 
     # Project 2025 and 2030 rates
     df_del['poverty_projected_2025'] = np.round(np.maximum(0.1, poverty_pred_2021 + 4 * df_del['poverty_reduction_rate_annual']), 1)

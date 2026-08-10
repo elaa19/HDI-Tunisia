@@ -94,6 +94,19 @@ def run_validation_and_mapping():
     df_del_pred['gov_official_rate'] = df_del_pred['governorate_name'].map(gov_rate_map)
     df_del_pred['aggregation_bias'] = df_del_pred['y_pred_within_anchored'] - df_del_pred['gov_official_rate']
 
+    if 'poverty_2015' not in df_del_pred.columns:
+        df_del_pred['poverty_2015'] = df_del_pred['taux_pauvrete_2015']
+    if 'poverty_2026' not in df_del_pred.columns:
+        df_del_pred['poverty_2026'] = df_del_pred['y_pred_within_anchored']
+
+    # Aggregated governorate rates for 2015, 2020, 2026
+    gov_2020_map = df_del_pred.groupby('governorate_name')['poverty_2020'].mean().to_dict() if 'poverty_2020' in df_del_pred.columns else {}
+    gov_2026_map = df_del_pred.groupby('governorate_name')['poverty_2026'].mean().to_dict() if 'poverty_2026' in df_del_pred.columns else {}
+
+    df_gov_pred['poverty_2015'] = df_gov_pred['taux_pauvrete_survey_2015']
+    df_gov_pred['poverty_2020'] = df_gov_pred['governorate_name'].map(gov_2020_map).fillna(df_gov_pred['taux_pauvrete_survey_2015']).round(1)
+    df_gov_pred['poverty_2026'] = df_gov_pred['governorate_name'].map(gov_2026_map).fillna(df_gov_pred['taux_pauvrete_survey_2015']).round(1)
+
     # Attach Latin delegation name from label file
     label_csv = pd.read_csv(os.path.join(BASE_DIR, "data", "tunisia_delegation_poverty_labels.csv"))
     label_csv['code_str'] = label_csv['code'].astype(str)

@@ -667,53 +667,73 @@ let tsChartInstance = null;
 let ablationData = null;
 let socioeconomicData = null;
 
+// Helper to construct foolproof asset URLs on GitHub Pages or local servers
+function getAssetUrl(relPath) {
+    let loc = window.location.pathname;
+    if (loc.indexOf('.') === -1 && !loc.endsWith('/')) {
+        loc = loc + '/';
+    }
+    let dir = loc.substring(0, loc.lastIndexOf('/') + 1);
+    if (!dir) dir = '/';
+    let cleanRel = relPath.replace(/^\.?\//, '');
+    return window.location.origin + dir + cleanRel;
+}
+
 // Load GeoJSON Data, INS Correlation, Time Series, Ablation & Socioeconomic Summaries
 async function loadData() {
+    let loader = document.getElementById('map-loading-indicator');
     try {
-        const resDel = await fetch('data/delegation_predictions.geojson');
+        if (loader) {
+            loader.style.display = 'flex';
+            loader.innerHTML = '<span style="width:18px;height:18px;border:3px solid rgba(56,189,248,0.2);border-top-color:#38bdf8;border-radius:50%;display:inline-block;animation:spin 1s linear infinite;"></span><span>Loading Delegation Boundaries (6.6 MB)...</span>';
+        }
+
+        const targetUrl = getAssetUrl('data/delegation_predictions.geojson');
+        const resDel = await fetch(targetUrl);
+        if (!resDel.ok) throw new Error(`HTTP ${resDel.status} fetching delegation data`);
         delegationData = await resDel.json();
 
-        const resGov = await fetch('data/gouvernorat_predictions.geojson');
-        gouvernoratData = await resGov.json();
-
-        try {
-            const resCorr = await fetch('data/ins_correlation_summary.json');
-            insCorrData = await resCorr.json();
-            renderInsModalData();
-        } catch (e) {
-            console.warn('INS Correlation JSON not found:', e);
-        }
-
-        try {
-            const resTs = await fetch('data/governorate_timeseries_summary.json');
-            tsData = await resTs.json();
-            populateTsDropdown();
-        } catch (e) {
-            console.warn('Time Series Summary JSON not found:', e);
-        }
-
-        try {
-            const resAblation = await fetch('data/ablation_study_summary.json');
-            ablationData = await resAblation.json();
-            renderAblationModalData();
-        } catch (e) {
-            console.warn('Ablation Study Summary JSON not found:', e);
-        }
-
-        try {
-            const resSocio = await fetch('data/city_socioeconomic_evolution.json');
-            socioeconomicData = await resSocio.json();
-        } catch (e) {
-            console.warn('City Socioeconomic Evolution JSON not found:', e);
-        }
-
+        // Render delegations immediately so the map is interactive right away!
         renderLayer();
-        let loader = document.getElementById('map-loading-indicator');
         if (loader) loader.style.display = 'none';
+
+        // Load governorates and auxiliary datasets asynchronously in background
+        fetch(getAssetUrl('data/gouvernorat_predictions.geojson'))
+            .then(r => r.ok ? r.json() : null)
+            .then(data => { if (data) gouvernoratData = data; })
+            .catch(e => console.warn('Gov GeoJSON error:', e));
+
+        fetch(getAssetUrl('data/ins_correlation_summary.json'))
+            .then(r => r.ok ? r.json() : null)
+            .then(data => { if (data) { insCorrData = data; renderInsModalData(); } })
+            .catch(e => console.warn('INS JSON error:', e));
+
+        fetch(getAssetUrl('data/governorate_timeseries_summary.json'))
+            .then(r => r.ok ? r.json() : null)
+            .then(data => { if (data) { tsData = data; populateTsDropdown(); } })
+            .catch(e => console.warn('Time series JSON error:', e));
+
+        fetch(getAssetUrl('data/ablation_study_summary.json'))
+            .then(r => r.ok ? r.json() : null)
+            .then(data => { if (data) { ablationData = data; renderAblationModalData(); } })
+            .catch(e => console.warn('Ablation JSON error:', e));
+
+        fetch(getAssetUrl('data/city_socioeconomic_evolution.json'))
+            .then(r => r.ok ? r.json() : null)
+            .then(data => { if (data) socioeconomicData = data; })
+            .catch(e => console.warn('Socioeconomic JSON error:', e));
+
     } catch (err) {
         console.error('Error loading GeoJSON layers:', err);
-        let loader = document.getElementById('map-loading-indicator');
-        if (loader) loader.innerHTML = '<span style="color:#ef4444">⚠️ Error loading map data.</span>';
+        if (loader) {
+            loader.style.pointerEvents = 'auto';
+            loader.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="color: #ef4444; margin-bottom: 8px; font-size: 0.9rem;">⚠️ Error loading map: ${err.message}</div>
+                    <button onclick="loadData()" style="padding: 6px 16px; background: #0284c7; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">🔄 Retry Loading</button>
+                </div>
+            `;
+        }
     }
 }
 

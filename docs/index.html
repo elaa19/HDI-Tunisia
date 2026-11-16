@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>
+        if (window.location.pathname.indexOf('.') === -1 && !window.location.pathname.endsWith('/')) {
+            window.location.replace(window.location.pathname + '/' + window.location.search + window.location.hash);
+        }
+    </script>
+    <base href="./">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tunisia SDG 1 Poverty Risk Platform | AI Geospatial Assistant</title>
     <meta name="description" content="Interactive geospatial ML web platform for Tunisia SDG 1 poverty risk with AI Geospatial Chatbot Assistant and region inspector.">

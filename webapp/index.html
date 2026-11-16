@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>
+        if (window.location.pathname.indexOf('.') === -1 && !window.location.pathname.endsWith('/')) {
+            window.location.replace(window.location.pathname + '/' + window.location.search + window.location.hash);
+        }
+    </script>
+    <base href="./">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tunisia SDG 1 Poverty Risk Platform | AI Geospatial Assistant</title>
     <meta name="description" content="Interactive geospatial ML web platform for Tunisia SDG 1 poverty risk with AI Geospatial Chatbot Assistant and region inspector.">
@@ -14,8 +20,15 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
     <!-- Custom Dark Glassmorphism CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2.0">
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -30,8 +43,18 @@
             <div class="toggle-group year-toggle-group">
                 <span class="control-label">Year:</span>
                 <button id="btn-year-2015" class="toggle-btn year-btn" onclick="switchYear('2015')">2015</button>
+                <button id="btn-year-2017" class="toggle-btn year-btn" onclick="switchYear('2017')">2017</button>
                 <button id="btn-year-2020" class="toggle-btn year-btn" onclick="switchYear('2020')">2020</button>
+                <button id="btn-year-2023" class="toggle-btn year-btn" onclick="switchYear('2023')">2023</button>
                 <button id="btn-year-2026" class="toggle-btn year-btn active" onclick="switchYear('2026')">2026</button>
+                <button id="btn-playback" class="toggle-btn play-btn" onclick="toggleTimelinePlayback()" title="Auto-animate map through 2015 to 2026 layers">
+                    <span id="play-icon">▶</span> <span id="play-text">Play</span>
+                </button>
+            </div>
+            <div class="toggle-group mode-toggle-group">
+                <span class="control-label">Metric:</span>
+                <button id="btn-mode-poverty" class="toggle-btn mode-btn active" onclick="switchMapMode('poverty')">Poverty Rate (%)</button>
+                <button id="btn-mode-hdi" class="toggle-btn mode-btn" onclick="switchMapMode('hdi')">Satellite HDI</button>
             </div>
             <div class="toggle-group layer-toggle-group">
                 <button id="btn-delegation" class="toggle-btn active" onclick="switchLayer('delegation')">
@@ -41,6 +64,21 @@
                     Coarse Governorate (ADM1)
                 </button>
             </div>
+            <button id="btn-ins-modal" class="toggle-btn ins-corr-btn" onclick="openInsModal()">
+                INS Correlation
+            </button>
+            <button id="btn-ablation-modal" class="toggle-btn ablation-btn" onclick="openAblationModal()">
+                Ablation Study
+            </button>
+            <button id="btn-socioeconomic-modal" class="toggle-btn socioeconomic-btn" onclick="openSocioeconomicModal()">
+                Socioeconomic Evolution
+            </button>
+            <button id="btn-ts-modal" class="toggle-btn ts-btn" onclick="openTsModal()">
+                Time Series Analysis
+            </button>
+            <button id="btn-pixel-modal" class="toggle-btn pixel-modal-btn" onclick="openPixelModal()">
+                📡 Pixel Analytics
+            </button>
         </div>
     </header>
 
@@ -72,6 +110,17 @@
                         <span class="stat-sub">0.2% Poverty Rate</span>
                     </div>
                 </div>
+
+                <!-- Prominent Sidebar Ablation Quick-Access Banner -->
+                <div class="ablation-sidebar-card" onclick="openAblationModal()" style="margin-top: 12px; padding: 10px 12px; background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(59, 130, 246, 0.15)); border: 1px solid rgba(168, 85, 247, 0.5); border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s ease;" title="Click to view Daytime vs Nighttime Lights vs Fusion Model ablation study results">
+                    <div>
+                        <div style="font-size: 0.82rem; font-weight: 700; color: #e9d5ff; display: flex; align-items: center; gap: 6px;">
+                            <span style="color: #c084fc;">★</span> Feature Modality Ablation Study
+                        </div>
+                        <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 2px;">Daytime Imagery vs Nightlights vs Fusion (r = +0.655)</div>
+                    </div>
+                    <span style="font-size: 0.75rem; font-weight: 700; color: #ffffff; background: #9333ea; padding: 5px 10px; border-radius: 5px; white-space: nowrap;">View &rarr;</span>
+                </div>
             </div>
 
             <!-- Search & Region Inspector -->
@@ -99,10 +148,45 @@
                             </div>
                         </div>
 
+                        <!-- Satellite HDI Formula Decomposition Panel -->
+                        <div class="hdi-decomp-card">
+                            <div class="hdi-decomp-hdr">
+                                <span class="risk-title">Satellite HDI Formula Decomposition</span>
+                                <span class="hdi-formula-tag">HDI = (I<sub>Inc</sub> · I<sub>Edu</sub> · I<sub>Health</sub>)<sup>1/3</sup></span>
+                            </div>
+                            <div class="hdi-gauge-group">
+                                <div class="hdi-gauge-item">
+                                    <div class="gauge-lbl-row">
+                                        <span class="gauge-name">Income Index (NTL & Roads)</span>
+                                        <span id="gauge-val-income" class="gauge-val text-cyan">--</span>
+                                    </div>
+                                    <div class="gauge-track"><div id="gauge-bar-income" class="gauge-fill bg-cyan" style="width: 0%;"></div></div>
+                                </div>
+                                <div class="hdi-gauge-item">
+                                    <div class="gauge-lbl-row">
+                                        <span class="gauge-name">Education & Built-up (NDBI)</span>
+                                        <span id="gauge-val-edu" class="gauge-val text-purple">--</span>
+                                    </div>
+                                    <div class="gauge-track"><div id="gauge-bar-edu" class="gauge-fill bg-purple" style="width: 0%;"></div></div>
+                                </div>
+                                <div class="hdi-gauge-item">
+                                    <div class="gauge-lbl-row">
+                                        <span class="gauge-name">Health & Climate (NDVI & LST)</span>
+                                        <span id="gauge-val-health" class="gauge-val text-emerald">--</span>
+                                    </div>
+                                    <div class="gauge-track"><div id="gauge-bar-health" class="gauge-fill bg-emerald" style="width: 0%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="inspect-details-grid">
                             <div class="inspect-detail-item">
                                 <span class="detail-lbl">Population</span>
                                 <span id="inspect-pop" class="detail-val">--</span>
+                            </div>
+                            <div class="inspect-detail-item">
+                                <span class="detail-lbl">Satellite HDI Score</span>
+                                <span id="inspect-hdi" class="detail-val" style="color: #38bdf8;">--</span>
                             </div>
                             <div class="inspect-detail-item">
                                 <span class="detail-lbl">NDVI (Vegetation)</span>
@@ -120,9 +204,13 @@
                                 <span class="detail-lbl">Road Density</span>
                                 <span id="inspect-road" class="detail-val">-- km/km²</span>
                             </div>
-                            <div class="inspect-detail-item">
-                                <span class="detail-lbl">Aggregation Bias</span>
-                                <span id="inspect-bias" class="detail-val">-- %p</span>
+                        </div>
+
+                        <!-- Socioeconomic Evolution & Driver Analysis -->
+                        <div class="socioeconomic-drivers-card" style="margin-top: 10px; background: rgba(15, 23, 42, 0.6); padding: 8px 10px; border-radius: 6px; border-left: 3px solid #38bdf8;">
+                            <span class="risk-title" style="color: #38bdf8;">🏙️ City Socioeconomic Evolution & Drivers</span>
+                            <div id="inspect-socioeconomic" style="font-size: 0.74rem; color: #cbd5e1; line-height: 1.4; margin-top: 4px;">
+                                Hover or click any region on the map to view multi-year city evolution drivers & economic dynamics.
                             </div>
                         </div>
                     </div>
@@ -140,8 +228,9 @@
                     </div>
                     <div class="chat-suggestions">
                         <button class="sug-btn" onclick="sendSuggestedQuery('Which delegation has the highest poverty rate?')">Highest poverty delegation?</button>
-                        <button class="sug-btn" onclick="sendSuggestedQuery('What is the poverty rate in Kasserine?')">Kasserine stats?</button>
-                        <button class="sug-btn" onclick="sendSuggestedQuery('Compare Tunis and Kairouan poverty')">Tunis vs Kairouan?</button>
+                        <button class="sug-btn" onclick="sendSuggestedQuery('How well does the model correlate with INS data?')">INS correlation stats?</button>
+                        <button class="sug-btn" onclick="sendSuggestedQuery('Compare daytime vs nighttime lights ablation study results')">Daytime vs NTL Ablation?</button>
+                        <button class="sug-btn" onclick="sendSuggestedQuery('Explain raw satellite sensor pixel features & grid resolution')">📡 Satellite Pixel Stats?</button>
                     </div>
                     <div class="chat-input-row">
                         <input type="text" id="chat-input" placeholder="Ask about any delegation..." onkeypress="handleChatKeyPress(event)">
@@ -153,7 +242,26 @@
 
         <!-- Leaflet Map Area -->
         <section class="map-wrapper">
+            <div id="map-loading-indicator" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(56, 189, 248, 0.4); padding: 14px 22px; border-radius: 12px; color: #38bdf8; font-weight: 600; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); backdrop-filter: blur(8px); pointer-events: none;">
+                <span style="width: 18px; height: 18px; border: 3px solid rgba(56, 189, 248, 0.2); border-top-color: #38bdf8; border-radius: 50%; display: inline-block; animation: spin 1s linear infinite;"></span>
+                <span>Loading Satellite Map & GeoJSON Layers...</span>
+            </div>
             <div id="map" class="leaflet-map-container"></div>
+
+            <!-- Satellite Feature Pixel Overlay Control Panel -->
+            <div class="pixel-layer-control glass-panel">
+                <span class="pixel-control-title">📡 Raw Satellite Sensor Pixel Overlay Layers (51,269 Grid Points)</span>
+                <div class="pixel-btn-group">
+                    <button id="btn-pixel-none" class="pixel-toggle-btn active" onclick="togglePixelLayer('none')">Off (Polygons)</button>
+                    <button id="btn-pixel-viirs" class="pixel-toggle-btn" onclick="togglePixelLayer('viirs')">🌌 VIIRS NTL</button>
+                    <button id="btn-pixel-ndvi" class="pixel-toggle-btn" onclick="togglePixelLayer('ndvi')">🌿 S2 NDVI</button>
+                    <button id="btn-pixel-ndbi" class="pixel-toggle-btn" onclick="togglePixelLayer('ndbi')">🏗️ S2 NDBI</button>
+                    <button id="btn-pixel-lst" class="pixel-toggle-btn" onclick="togglePixelLayer('lst')">🌡️ Landsat Thermal</button>
+                    <button id="btn-pixel-ndwi" class="pixel-toggle-btn" onclick="togglePixelLayer('ndwi')">💧 S2 NDWI Water</button>
+                    <button id="btn-pixel-savi" class="pixel-toggle-btn" onclick="togglePixelLayer('savi')">🌱 S2 SAVI Soil</button>
+                    <button id="btn-pixel-evi" class="pixel-toggle-btn" onclick="togglePixelLayer('evi')">🍃 S2 EVI Veg</button>
+                </div>
+            </div>
             
             <!-- Map Legend -->
             <div class="map-legend glass-panel">
@@ -166,13 +274,446 @@
                     <span>45%+ (High)</span>
                 </div>
             </div>
+
+            <!-- Satellite Pixel Sensor Legend Box -->
+            <div id="pixel-sensor-legend" class="pixel-sensor-legend glass-panel hidden" style="position: absolute; bottom: 85px; right: 24px; padding: 10px 14px; border-radius: 8px; z-index: 1000; width: 260px; background: rgba(11, 15, 25, 0.92); border: 1px solid rgba(56, 189, 248, 0.3);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <span id="pixel-legend-title" style="font-size: 0.76rem; font-weight: 700; color: #38bdf8;">Sensor Feature Legend</span>
+                    <span id="pixel-legend-val" style="font-size: 0.72rem; color: #94a3b8;">--</span>
+                </div>
+                <div id="pixel-legend-gradient" style="height: 8px; border-radius: 4px; background: linear-gradient(to right, #000, #fff);"></div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.68rem; color: #94a3b8; margin-top: 2px;">
+                    <span id="pixel-legend-min">Min</span>
+                    <span id="pixel-legend-max">Max</span>
+                </div>
+                <div id="pixel-legend-desc" style="font-size: 0.7rem; color: #cbd5e1; margin-top: 4px; line-height: 1.3;">
+                    Description of sensor features.
+                </div>
+            </div>
         </section>
     </main>
+
+    <!-- INS Multi-Year Correlation Modal -->
+    <div id="ins-modal" class="modal-overlay hidden" onclick="closeInsModalOnOuterClick(event)">
+        <div class="modal-container glass-panel">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <h2>INS Tunisia Multi-Year Correlation & Validation Panel</h2>
+                    <span class="modal-subtitle">Empirical Validation of Model Predictions vs. Institut National de la Statistique (INS) Data (2011–2026)</span>
+                </div>
+                <button class="modal-close-btn" onclick="closeInsModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Top Summary Cards -->
+                <div class="modal-stats-grid">
+                    <div class="modal-stat-card border-green">
+                        <span class="modal-stat-label">Multi-Temporal Regional Correlation</span>
+                        <span class="modal-stat-val text-green" id="corr-val-pooled">r = +0.7308</span>
+                        <span class="modal-stat-sub">Spearman ρ = +0.6558 (p < 0.001, N = 21)</span>
+                    </div>
+                    <div class="modal-stat-card border-blue">
+                        <span class="modal-stat-label">Governorate Cross-Sectional Score</span>
+                        <span class="modal-stat-val text-blue" id="corr-val-gov">r = +0.6804</span>
+                        <span class="modal-stat-sub">2015 Official INS Survey Baseline (N = 24)</span>
+                    </div>
+                    <div class="modal-stat-card border-amber">
+                        <span class="modal-stat-label">Nighttime Lights (NTL) Correlation</span>
+                        <span class="modal-stat-val text-amber" id="corr-val-ntl">r = -0.6499</span>
+                        <span class="modal-stat-sub">Inverse Economic Radiance (p = 0.0006)</span>
+                    </div>
+                    <div class="modal-stat-card border-purple">
+                        <span class="modal-stat-label">Building Density Correlation</span>
+                        <span class="modal-stat-val text-purple" id="corr-val-bldg">r = +0.4704</span>
+                        <span class="modal-stat-sub">Urban Density Footprint (p = 0.0203)</span>
+                    </div>
+                </div>
+
+                <!-- INS Official Survey Map Spatial Validation -->
+                <div class="corr-section ins-map-validation-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <h3 style="margin: 0; color: #38bdf8;">Official INS 2015 Poverty Survey Benchmark Map Validation</h3>
+                        <span style="font-size: 0.72rem; color: #10b981; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 3px 8px; border-radius: 4px; font-weight: 600;">
+                            ✓ Spatial Diagnostic Sanity Check Passed
+                        </span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.8rem; background: rgba(15, 23, 42, 0.5); padding: 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                        <div>
+                            <div style="color: #94a3b8; font-size: 0.75rem; margin-bottom: 2px;">Interior Governorates Official INS Survey Poverty Mean:</div>
+                            <div style="font-size: 1.1rem; font-weight: 700; color: #f43f5e;">29.2%</div>
+                            <div style="color: #64748b; font-size: 0.7rem;">Kairouan (34.9%), Le Kef (34.2%), Kasserine (32.8%), Béja (32.0%)</div>
+                        </div>
+                        <div>
+                            <div style="color: #94a3b8; font-size: 0.75rem; margin-bottom: 2px;">Coastal Urban Governorates Official INS Survey Poverty Mean:</div>
+                            <div style="font-size: 1.1rem; font-weight: 700; color: #10b981;">7.2%</div>
+                            <div style="color: #64748b; font-size: 0.7rem;">Tunis (3.5%), Ben Arous (4.3%), Ariana (5.4%), Sfax (5.8%), Nabeul (7.4%)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Temporal Horizon Cards -->
+                <div class="corr-section">
+                    <h3>Multi-Period Trajectory Alignment (INS MICS MPI vs Model Estimates)</h3>
+                    <div class="periods-grid">
+                        <div class="period-card">
+                            <span class="period-lbl">Period 1: 2011 / 2015</span>
+                            <span class="period-val" id="period-r-1">r = +0.8885</span>
+                            <span class="period-desc">2011 INS MICS MPI Headcount vs 2015 Baseline</span>
+                        </div>
+                        <div class="period-card">
+                            <span class="period-lbl">Period 2: 2018 / 2020</span>
+                            <span class="period-val" id="period-r-2">r = +0.8790</span>
+                            <span class="period-desc">2018 INS MICS MPI Headcount vs 2020 Model Estimate</span>
+                        </div>
+                        <div class="period-card">
+                            <span class="period-lbl">Period 3: 2023 / 2026</span>
+                            <span class="period-val" id="period-r-3">r = +0.6038</span>
+                            <span class="period-desc">2023 INS MICS MPI Headcount vs 2026 SDG Projection</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regional Breakdown Table -->
+                <div class="corr-section">
+                    <h3>7 Official INS Statistical Regions Dynamics Table</h3>
+                    <div class="table-wrapper">
+                        <table class="corr-table">
+                            <thead>
+                                <tr>
+                                    <th>INS Region</th>
+                                    <th>INS 2011 MPI (%)</th>
+                                    <th>INS 2018 MPI (%)</th>
+                                    <th>INS 2023 MPI (%)</th>
+                                    <th>Model 2015 (%)</th>
+                                    <th>Model 2020 (%)</th>
+                                    <th>Model 2026 (%)</th>
+                                    <th>Alignment Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ins-table-body">
+                                <tr><td colspan="8">Loading INS correlation dataset...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Satellite Feature Modality Ablation Study Modal -->
+    <div id="ablation-modal" class="modal-overlay hidden" onclick="closeAblationModalOnOuterClick(event)">
+        <div class="modal-container glass-panel modal-lg">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <h2>Satellite Feature Modality Ablation Study</h2>
+                    <span class="modal-subtitle">Empirical ML Comparison: Daytime Imagery Only vs. Nighttime Lights Only vs. Fusion Model</span>
+                </div>
+                <button class="modal-close-btn" onclick="closeAblationModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Top Summary Modality Cards -->
+                <div class="modal-stats-grid">
+                    <div class="modal-stat-card border-blue">
+                        <span class="modal-stat-label">Daytime Imagery Only (19 Features)</span>
+                        <span class="modal-stat-val text-blue" id="ablation-daytime-r">r = +0.3873</span>
+                        <span class="modal-stat-sub">NDVI, NDBI, LST, Roads, Built-up (R² = 0.1368)</span>
+                    </div>
+                    <div class="modal-stat-card border-amber">
+                        <span class="modal-stat-label">Nighttime Lights Only (4 Features)</span>
+                        <span class="modal-stat-val text-amber" id="ablation-ntl-r">r = +0.6197</span>
+                        <span class="modal-stat-sub">Suomi-NPP VIIRS NTL Radiance (R² = 0.3013)</span>
+                    </div>
+                    <div class="modal-stat-card border-purple" style="border: 2px solid #a855f7; background: rgba(168, 85, 247, 0.12);">
+                        <span class="modal-stat-label">★ Fusion Model (24 Features)</span>
+                        <span class="modal-stat-val text-purple" id="ablation-fusion-r" style="color: #c084fc;">r = +0.6548</span>
+                        <span class="modal-stat-sub">Highest Accuracy (Spearman ρ = +0.6922, R² = 0.3112)</span>
+                    </div>
+                </div>
+
+                <!-- Key Findings Highlight Box -->
+                <div class="corr-section ins-map-validation-card" style="border-left: 4px solid #a855f7;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <h3 style="margin: 0; color: #c084fc;">Key Scientific Findings: Modality Performance Analysis</h3>
+                        <span style="font-size: 0.72rem; color: #a855f7; background: rgba(168, 85, 247, 0.2); border: 1px solid rgba(168, 85, 247, 0.4); padding: 3px 8px; border-radius: 4px; font-weight: 600;">
+                            ✓ Empirical Fusion Advantage Confirmed
+                        </span>
+                    </div>
+                    <div style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5; background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                        • <strong>Nighttime Lights (NTL) Radiance</strong> captures the core economic activity signal ($R^2 = 0.3013$, Governorate $r = 0.6197$), significantly outperforming daytime vegetation/building indices alone ($R^2 = 0.1368$).<br>
+                        • <strong>The Multi-Sensor Fusion Model</strong> combines daytime biophysical infrastructure (NDBI, road density) with nocturnal economic radiance and thermal interactions ($\text{NTL} \times \text{LST}$), achieving the <strong>highest overall spatial correlation</strong> ($r = +0.6548$, Spearman $\rho = +0.6922$).
+                    </div>
+                </div>
+
+                <!-- Modality Comparison Table -->
+                <div class="corr-section">
+                    <h3>Cross-Validation Benchmark Results (5-Fold Group CV by Governorate)</h3>
+                    <div class="table-wrapper">
+                        <table class="corr-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature Modality</th>
+                                    <th># Features</th>
+                                    <th>Delegation R²</th>
+                                    <th>Delegation Pearson r</th>
+                                    <th>Governorate Pearson r</th>
+                                    <th>Governorate Spearman ρ</th>
+                                    <th>Delegation MAE</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ablation-table-body">
+                                <tr><td colspan="7">Loading ablation study results...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- City Socioeconomic Evolution & Drivers Modal -->
+    <div id="socioeconomic-modal" class="modal-overlay hidden" onclick="closeSocioeconomicModalOnOuterClick(event)">
+        <div class="modal-container glass-panel modal-lg">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <h2>Tunisia City Socioeconomic Evolution & Structural Drivers</h2>
+                    <span class="modal-subtitle">Multi-Year Economic Dynamics, Baseline Disparities, Post-2015 Interventions & 2026 Projections</span>
+                </div>
+                <button class="modal-close-btn" onclick="closeSocioeconomicModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Governorate Selector Bar -->
+                <div class="socioeconomic-gov-bar" style="display: flex; gap: 10px; align-items: center; background: rgba(30, 41, 59, 0.5); padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 14px;">
+                    <label style="font-size: 0.8rem; font-weight: 700; color: #38bdf8; white-space: nowrap;">Select Governorate / City:</label>
+                    <select id="socioeconomic-gov-select" style="flex: 1; background: #0f172a; color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.2); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem;" onchange="onSocioeconomicGovChange(this.value)">
+                        <option value="Tunis">Tunis (Capital Metropolis)</option>
+                        <option value="Kairouan">Kairouan (Central West Agriculture)</option>
+                        <option value="Kasserine">Kasserine (Central West Interior)</option>
+                        <option value="Sfax">Sfax (Centre East Industry & Port)</option>
+                        <option value="Sousse">Sousse (Sahel Tourism & Textile)</option>
+                        <option value="Le Kef">Le Kef (North West Border Cereal)</option>
+                        <option value="Sidi Bouzid">Sidi Bouzid (Central Steppe Agribusiness)</option>
+                        <option value="Gafsa">Gafsa (South West Phosphate Mining)</option>
+                        <option value="Tataouine">Tataouine (Southern Desert Frontier)</option>
+                        <option value="Bizerte">Bizerte (Northern Maritime Port)</option>
+                    </select>
+                </div>
+
+                <!-- City Multi-Year Trajectory Stats Grid -->
+                <div class="modal-stats-grid">
+                    <div class="modal-stat-card border-blue">
+                        <span class="modal-stat-label">2015 Official INS Baseline Poverty</span>
+                        <span class="modal-stat-val text-blue" id="socio-stat-2015">3.5%</span>
+                        <span class="modal-stat-sub">Official Survey Baseline</span>
+                    </div>
+                    <div class="modal-stat-card border-cyan">
+                        <span class="modal-stat-label">2020 Midpoint Poverty Estimate</span>
+                        <span class="modal-stat-val text-cyan" id="socio-stat-2020">3.2%</span>
+                        <span class="modal-stat-sub">Satellite Model Estimate</span>
+                    </div>
+                    <div class="modal-stat-card border-amber">
+                        <span class="modal-stat-label">2023 Model Rate</span>
+                        <span class="modal-stat-val text-amber" id="socio-stat-2023">3.0%</span>
+                        <span class="modal-stat-sub">Satellite Feature Map</span>
+                    </div>
+                    <div class="modal-stat-card border-purple">
+                        <span class="modal-stat-label">2026 Model Forecast</span>
+                        <span class="modal-stat-val text-purple" id="socio-stat-2026">2.8%</span>
+                        <span class="modal-stat-sub">ML Projection</span>
+                    </div>
+                </div>
+
+                <!-- 4 Structured Socioeconomic Analysis Cards -->
+                <div class="socioeconomic-cards-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px;">
+                    <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border-left: 4px solid #38bdf8; border: 1px solid rgba(255, 255, 255, 0.08);">
+                        <h4 style="margin: 0 0 6px 0; color: #38bdf8; font-size: 0.88rem;">📊 Economic & Industrial Profile</h4>
+                        <div id="socio-card-profile" style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.5;">Loading economic profile...</div>
+                    </div>
+                    <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border-left: 4px solid #f59e0b; border: 1px solid rgba(255, 255, 255, 0.08);">
+                        <h4 style="margin: 0 0 6px 0; color: #f59e0b; font-size: 0.88rem;">🏛️ Historical Disparities & Regional Context</h4>
+                        <div id="socio-card-history" style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.5;">Loading historical context...</div>
+                    </div>
+                    <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border-left: 4px solid #10b981; border: 1px solid rgba(255, 255, 255, 0.08);">
+                        <h4 style="margin: 0 0 6px 0; color: #10b981; font-size: 0.88rem;">⚡ Post-2015 Development Drivers & Interventions</h4>
+                        <div id="socio-card-drivers" style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.5;">Loading development drivers...</div>
+                    </div>
+                    <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border-left: 4px solid #c084fc; border: 1px solid rgba(255, 255, 255, 0.08);">
+                        <h4 style="margin: 0 0 6px 0; color: #c084fc; font-size: 0.88rem;">🎯 2026–2030 SDG 1 Target Trajectory</h4>
+                        <div id="socio-card-sdg" style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.5;">Loading SDG trajectory...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Governorate Time Series Analysis Modal -->
+    <div id="ts-modal" class="modal-overlay hidden" onclick="closeTsModalOnOuterClick(event)">
+        <div class="modal-container glass-panel modal-lg">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <h2>Tunisia Governorate Time Series Map Evolution (2015–2026)</h2>
+                    <span class="modal-subtitle">Satellite Feature & HDI Formula Trajectories across 2015, 2017, 2020, 2023, and 2026 Map Layers</span>
+                </div>
+                <button class="modal-close-btn" onclick="closeTsModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Controls Row -->
+                <div class="ts-controls-row">
+                    <div class="ts-select-group">
+                        <label for="ts-gov-select" class="ts-select-lbl">Select Governorate:</label>
+                        <select id="ts-gov-select" class="ts-select" onchange="selectTsGovernorate(this.value)">
+                            <option value="NATIONAL">ALL GOVERNORATES (National Average Curve)</option>
+                        </select>
+                    </div>
+                    <div class="ts-metric-toggle" style="display: flex; gap: 6px; align-items: center;">
+                        <span style="font-size: 0.76rem; font-weight: 700; color: #94a3b8;">Metric:</span>
+                        <button id="btn-ts-metric-poverty" class="toggle-btn ts-metric-btn active" onclick="switchTsMetric('poverty')">Poverty Rate (%)</button>
+                        <button id="btn-ts-metric-hdi" class="toggle-btn ts-metric-btn" onclick="switchTsMetric('hdi')">Satellite HDI Score</button>
+                    </div>
+                    <div class="ts-quick-filters">
+                        <button class="sug-btn" onclick="selectTsGovernorate('Kairouan')">Kairouan</button>
+                        <button class="sug-btn" onclick="selectTsGovernorate('Kasserine')">Kasserine</button>
+                        <button class="sug-btn" onclick="selectTsGovernorate('Le Kef')">Le Kef</button>
+                        <button class="sug-btn" onclick="selectTsGovernorate('Tunis')">Tunis</button>
+                        <button class="sug-btn" onclick="selectTsGovernorate('Sfax')">Sfax</button>
+                    </div>
+                </div>
+
+                <!-- Governorate Highlight Stats Grid -->
+                <div class="modal-stats-grid">
+                    <div class="modal-stat-card border-blue">
+                        <span class="modal-stat-label">2015 Base HDI Score</span>
+                        <span class="modal-stat-val text-blue" id="ts-stat-2015">--</span>
+                        <span class="modal-stat-sub" id="ts-sub-2015">Satellite HDI Baseline</span>
+                    </div>
+                    <div class="modal-stat-card border-cyan">
+                        <span class="modal-stat-label">2020 Midpoint HDI</span>
+                        <span class="modal-stat-val text-cyan" id="ts-stat-2020" style="color: #06b6d4;">--</span>
+                        <span class="modal-stat-sub">Satellite Model</span>
+                    </div>
+                    <div class="modal-stat-card border-amber">
+                        <span class="modal-stat-label">2023 Satellite HDI</span>
+                        <span class="modal-stat-val text-amber" id="ts-stat-2023">--</span>
+                        <span class="modal-stat-sub">Satellite Feature Map</span>
+                    </div>
+                    <div class="modal-stat-card border-purple">
+                        <span class="modal-stat-label">2026 Model HDI Score</span>
+                        <span class="modal-stat-val text-purple" id="ts-stat-2026">--</span>
+                        <span class="modal-stat-sub">ML Satellite Model</span>
+                    </div>
+                </div>
+
+                <!-- Time Series Chart Canvas Container -->
+                <div class="chart-wrapper">
+                    <canvas id="timeseries-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Satellite Raster Pixel Analytics & Spatial Point Cloud Explorer Modal -->
+    <div id="pixel-modal" class="modal-overlay hidden" onclick="closePixelModalOnOuterClick(event)">
+        <div class="modal-container glass-panel modal-lg">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <h2>📡 Satellite Raster Pixel Analytics & Spatial Point Cloud Explorer</h2>
+                    <span class="modal-subtitle">High-Resolution Multi-Temporal Point Cloud Analysis (51,269 Spatial Grid Points, 2015–2026)</span>
+                </div>
+                <button class="modal-close-btn" onclick="closePixelModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Sensor Channel Selection Tabs -->
+                <div class="pixel-tab-group" style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+                    <button id="pixel-tab-viirs" class="pixel-tab-btn active" onclick="switchPixelModalSensor('viirs')">🌌 VIIRS NTL</button>
+                    <button id="pixel-tab-ndvi" class="pixel-tab-btn" onclick="switchPixelModalSensor('ndvi')">🌿 S2 NDVI</button>
+                    <button id="pixel-tab-ndbi" class="pixel-tab-btn" onclick="switchPixelModalSensor('ndbi')">🏗️ S2 NDBI</button>
+                    <button id="pixel-tab-lst" class="pixel-tab-btn" onclick="switchPixelModalSensor('lst')">🌡️ Landsat LST</button>
+                    <button id="pixel-tab-ndwi" class="pixel-tab-btn" onclick="switchPixelModalSensor('ndwi')">💧 S2 NDWI Water</button>
+                    <button id="pixel-tab-savi" class="pixel-tab-btn" onclick="switchPixelModalSensor('savi')">🌱 S2 SAVI Soil</button>
+                    <button id="pixel-tab-evi" class="pixel-tab-btn" onclick="switchPixelModalSensor('evi')">🍃 S2 EVI Veg</button>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="modal-stats-grid">
+                    <div class="modal-stat-card border-amber">
+                        <span class="modal-stat-label">Total Spatial Grid Points</span>
+                        <span class="modal-stat-val text-amber" id="pixel-modal-count">51,269</span>
+                        <span class="modal-stat-sub">Raw Sensor Sampling Grid</span>
+                    </div>
+                    <div class="modal-stat-card border-cyan">
+                        <span class="modal-stat-label">Spatial Resolution</span>
+                        <span class="modal-stat-val text-cyan">~0.01° lat/lon</span>
+                        <span class="modal-stat-sub">~1 km² Pixel Cell Grid</span>
+                    </div>
+                    <div class="modal-stat-card border-green">
+                        <span class="modal-stat-label">Active Channel Mean</span>
+                        <span class="modal-stat-val text-green" id="pixel-modal-mean">--</span>
+                        <span class="modal-stat-sub" id="pixel-modal-sensor-name">VIIRS NTL Radiance</span>
+                    </div>
+                    <div class="modal-stat-card border-purple">
+                        <span class="modal-stat-label">Spatial Max Radiance</span>
+                        <span class="modal-stat-val text-purple" id="pixel-modal-max">--</span>
+                        <span class="modal-stat-sub" id="pixel-modal-max-loc">Tunis Metropolis</span>
+                    </div>
+                </div>
+
+                <!-- Charts Dual Layout -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                    <div class="chart-card glass-panel" style="padding: 12px; border-radius: 8px;">
+                        <h3 style="font-size: 0.85rem; margin-bottom: 8px; color: #38bdf8; display: flex; align-items: center; justify-content: space-between;">
+                            <span>📊 Sensor Value Distribution (Histogram)</span>
+                            <span id="pixel-dist-year-badge" style="font-size: 0.72rem; color: #94a3b8;">Year 2026</span>
+                        </h3>
+                        <div class="chart-wrapper" style="height: 210px;">
+                            <canvas id="pixel-distribution-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card glass-panel" style="padding: 12px; border-radius: 8px;">
+                        <h3 style="font-size: 0.85rem; margin-bottom: 8px; color: #a855f7; display: flex; align-items: center; justify-content: space-between;">
+                            <span>📈 Multi-Year Sensor Trajectory</span>
+                            <span style="font-size: 0.72rem; color: #94a3b8;">2015–2026 Evolution</span>
+                        </h3>
+                        <div class="chart-wrapper" style="height: 210px;">
+                            <canvas id="pixel-trajectory-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hotspots Summary Table -->
+                <div class="pixel-hotspots-card glass-panel" style="padding: 12px; border-radius: 8px;">
+                    <h3 style="font-size: 0.85rem; margin-bottom: 8px; color: #f59e0b; display: flex; align-items: center; justify-content: space-between;">
+                        <span>🔥 Regional Satellite Sensor Intensity Hotspots</span>
+                        <span style="font-size: 0.72rem; color: #94a3b8; font-weight: normal;">Top delegation centers ranked by sensor intensity</span>
+                    </h3>
+                    <div style="max-height: 180px; overflow-y: auto;">
+                        <table class="pixel-table" style="width: 100%; border-collapse: collapse; font-size: 0.76rem;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: #94a3b8; text-align: left;">
+                                    <th style="padding: 6px;">Rank</th>
+                                    <th style="padding: 6px;">Governorate</th>
+                                    <th style="padding: 6px;">Delegation</th>
+                                    <th style="padding: 6px;">Sensor Value</th>
+                                    <th style="padding: 6px;">Normalized Score</th>
+                                    <th style="padding: 6px;">Socioeconomic Dynamics</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pixel-hotspots-tbody">
+                                <!-- Dynamically populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     
     <!-- Custom Map Script -->
-    <script src="map.js"></script>
+    <script src="map.js?v=2.0"></script>
 </body>
 </html>

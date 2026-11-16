@@ -695,7 +695,10 @@ async function loadData() {
 
         // Render delegations immediately so the map is interactive right away!
         renderLayer();
-        if (loader) loader.style.display = 'none';
+        if (loader) {
+            loader.style.display = 'none';
+            loader.remove();
+        }
 
         // Load governorates and auxiliary datasets asynchronously in background
         fetch(getAssetUrl('data/gouvernorat_predictions.geojson'))
@@ -725,7 +728,8 @@ async function loadData() {
 
     } catch (err) {
         console.error('Error loading GeoJSON layers:', err);
-        if (loader) {
+        let loader = document.getElementById('map-loading-indicator');
+        if (loader && !geojsonLayer) {
             loader.style.pointerEvents = 'auto';
             loader.innerHTML = `
                 <div style="text-align: center;">
@@ -733,6 +737,8 @@ async function loadData() {
                     <button onclick="loadData()" style="padding: 6px 16px; background: #0284c7; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">🔄 Retry Loading</button>
                 </div>
             `;
+        } else if (loader) {
+            loader.remove();
         }
     }
 }

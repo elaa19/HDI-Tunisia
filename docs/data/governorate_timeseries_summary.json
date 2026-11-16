@@ -1,0 +1,1024 @@
+{
+  "metadata": {
+    "title": "Tunisia Governorate Poverty Rate & Satellite HDI Multi-Year Map Evolution (2015, 2017, 2020, 2023, 2026)",
+    "map_years_evaluated": [
+      "2015",
+      "2017",
+      "2020",
+      "2023",
+      "2026"
+    ],
+    "years_evaluated": [
+      "2011",
+      "2015",
+      "2017",
+      "2018",
+      "2020",
+      "2023",
+      "2025",
+      "2026",
+      "2030"
+    ],
+    "governorate_count": 24
+  },
+  "national_average_trajectory": {
+    "2015": 17.7,
+    "2017": 16.7,
+    "2020": 15.6,
+    "2023": 14.6,
+    "2026": 13.6
+  },
+  "national_hdi_trajectory": {
+    "2015": 0.739,
+    "2017": 0.753,
+    "2020": 0.769,
+    "2023": 0.785,
+    "2026": 0.801
+  },
+  "governorates": [
+    {
+      "governorate_name": "Kasserine",
+      "gov_clean": "KASSERINE",
+      "ins_region": "Central West",
+      "population": 439243,
+      "poverty_survey_2015": 32.8,
+      "poverty_census_2015": 33.6,
+      "time_series": {
+        "2015": 32.8,
+        "2017": 33.0,
+        "2020": 31.8,
+        "2023": 30.6,
+        "2026": 29.4,
+        "2011": 34.3,
+        "2018": 31.7,
+        "2025": 31.4,
+        "2030": 29.5
+      },
+      "map_time_series": {
+        "2015": 32.8,
+        "2017": 33.0,
+        "2020": 31.8,
+        "2023": 30.6,
+        "2026": 29.4
+      },
+      "hdi_time_series": {
+        "2015": 0.544,
+        "2017": 0.557,
+        "2020": 0.574,
+        "2023": 0.59,
+        "2026": 0.607
+      },
+      "annual_velocity_pp": -0.381,
+      "net_change_2015_2026_pp": -3.4,
+      "net_change_2015_2030_pp": -3.3,
+      "relative_change_pct": -10.1,
+      "ntl_annual_growth_pct": 1.99,
+      "built_growth_pct": 1.76,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "El Kef",
+      "gov_clean": "LE KEF",
+      "ins_region": "North West",
+      "population": 232308,
+      "poverty_survey_2015": 34.2,
+      "poverty_census_2015": 33.1,
+      "time_series": {
+        "2015": 34.2,
+        "2017": 32.1,
+        "2020": 30.8,
+        "2023": 29.7,
+        "2026": 28.5,
+        "2011": 35.4,
+        "2018": 33.3,
+        "2025": 32.4,
+        "2030": 31.0
+      },
+      "map_time_series": {
+        "2015": 34.2,
+        "2017": 32.1,
+        "2020": 30.8,
+        "2023": 29.7,
+        "2026": 28.5
+      },
+      "hdi_time_series": {
+        "2015": 0.544,
+        "2017": 0.558,
+        "2020": 0.575,
+        "2023": 0.59,
+        "2026": 0.607
+      },
+      "annual_velocity_pp": -0.296,
+      "net_change_2015_2026_pp": -5.7,
+      "net_change_2015_2030_pp": -3.2,
+      "relative_change_pct": -9.4,
+      "ntl_annual_growth_pct": 1.8,
+      "built_growth_pct": 1.15,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Kairouan",
+      "gov_clean": "KAIROUAN",
+      "ins_region": "Central West",
+      "population": 570436,
+      "poverty_survey_2015": 34.9,
+      "poverty_census_2015": 29.3,
+      "time_series": {
+        "2015": 34.9,
+        "2017": 28.8,
+        "2020": 27.6,
+        "2023": 26.5,
+        "2026": 25.4,
+        "2011": 36.0,
+        "2018": 34.1,
+        "2025": 33.4,
+        "2030": 32.1
+      },
+      "map_time_series": {
+        "2015": 34.9,
+        "2017": 28.8,
+        "2020": 27.6,
+        "2023": 26.5,
+        "2026": 25.4
+      },
+      "hdi_time_series": {
+        "2015": 0.581,
+        "2017": 0.594,
+        "2020": 0.611,
+        "2023": 0.626,
+        "2026": 0.643
+      },
+      "annual_velocity_pp": -0.268,
+      "net_change_2015_2026_pp": -9.5,
+      "net_change_2015_2030_pp": -2.8,
+      "relative_change_pct": -8.0,
+      "ntl_annual_growth_pct": 1.02,
+      "built_growth_pct": 1.85,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "B\u00e9ja",
+      "gov_clean": "BEJA",
+      "ins_region": "North West",
+      "population": 303032,
+      "poverty_survey_2015": 32.0,
+      "poverty_census_2015": 26.4,
+      "time_series": {
+        "2015": 32.0,
+        "2017": 25.4,
+        "2020": 24.3,
+        "2023": 23.3,
+        "2026": 22.1,
+        "2011": 33.3,
+        "2018": 31.1,
+        "2025": 30.9,
+        "2030": 29.3
+      },
+      "map_time_series": {
+        "2015": 32.0,
+        "2017": 25.4,
+        "2020": 24.3,
+        "2023": 23.3,
+        "2026": 22.1
+      },
+      "hdi_time_series": {
+        "2015": 0.62,
+        "2017": 0.633,
+        "2020": 0.65,
+        "2023": 0.666,
+        "2026": 0.682
+      },
+      "annual_velocity_pp": -0.316,
+      "net_change_2015_2026_pp": -9.9,
+      "net_change_2015_2030_pp": -2.7,
+      "relative_change_pct": -8.4,
+      "ntl_annual_growth_pct": 1.4,
+      "built_growth_pct": 1.79,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Sidi Bouzid",
+      "gov_clean": "SIDI BOUZID",
+      "ins_region": "Central West",
+      "population": 429912,
+      "poverty_survey_2015": 23.1,
+      "poverty_census_2015": 25.0,
+      "time_series": {
+        "2015": 23.1,
+        "2017": 24.6,
+        "2020": 23.5,
+        "2023": 22.4,
+        "2026": 21.3,
+        "2011": 24.4,
+        "2018": 22.1,
+        "2025": 21.8,
+        "2030": 20.1
+      },
+      "map_time_series": {
+        "2015": 23.1,
+        "2017": 24.6,
+        "2020": 23.5,
+        "2023": 22.4,
+        "2026": 21.3
+      },
+      "hdi_time_series": {
+        "2015": 0.63,
+        "2017": 0.643,
+        "2020": 0.66,
+        "2023": 0.676,
+        "2026": 0.692
+      },
+      "annual_velocity_pp": -0.333,
+      "net_change_2015_2026_pp": -1.8,
+      "net_change_2015_2030_pp": -3.0,
+      "relative_change_pct": -13.0,
+      "ntl_annual_growth_pct": 1.78,
+      "built_growth_pct": 1.47,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Mahdia",
+      "gov_clean": "MAHDIA",
+      "ins_region": "Centre East",
+      "population": 402857,
+      "poverty_survey_2015": 21.1,
+      "poverty_census_2015": 25.0,
+      "time_series": {
+        "2015": 21.1,
+        "2017": 24.5,
+        "2020": 23.3,
+        "2023": 22.3,
+        "2026": 21.1,
+        "2011": 22.5,
+        "2018": 20.1,
+        "2025": 19.6,
+        "2030": 17.9
+      },
+      "map_time_series": {
+        "2015": 21.1,
+        "2017": 24.5,
+        "2020": 23.3,
+        "2023": 22.3,
+        "2026": 21.1
+      },
+      "hdi_time_series": {
+        "2015": 0.636,
+        "2017": 0.649,
+        "2020": 0.666,
+        "2023": 0.682,
+        "2026": 0.699
+      },
+      "annual_velocity_pp": -0.343,
+      "net_change_2015_2026_pp": 0.0,
+      "net_change_2015_2030_pp": -3.2,
+      "relative_change_pct": -15.2,
+      "ntl_annual_growth_pct": 2.05,
+      "built_growth_pct": 1.24,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Siliana",
+      "gov_clean": "SILIANA",
+      "ins_region": "North West",
+      "population": 223087,
+      "poverty_survey_2015": 27.7,
+      "poverty_census_2015": 24.7,
+      "time_series": {
+        "2015": 27.7,
+        "2017": 23.9,
+        "2020": 22.7,
+        "2023": 21.6,
+        "2026": 20.4,
+        "2011": 29.2,
+        "2018": 26.6,
+        "2025": 26.2,
+        "2030": 24.3
+      },
+      "map_time_series": {
+        "2015": 27.7,
+        "2017": 23.9,
+        "2020": 22.7,
+        "2023": 21.6,
+        "2026": 20.4
+      },
+      "hdi_time_series": {
+        "2015": 0.645,
+        "2017": 0.659,
+        "2020": 0.676,
+        "2023": 0.691,
+        "2026": 0.708
+      },
+      "annual_velocity_pp": -0.372,
+      "net_change_2015_2026_pp": -7.3,
+      "net_change_2015_2030_pp": -3.4,
+      "relative_change_pct": -12.3,
+      "ntl_annual_growth_pct": 1.95,
+      "built_growth_pct": 1.66,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Jendouba",
+      "gov_clean": "JENDOUBA",
+      "ins_region": "North West",
+      "population": 395234,
+      "poverty_survey_2015": 22.4,
+      "poverty_census_2015": 21.5,
+      "time_series": {
+        "2015": 22.4,
+        "2017": 19.6,
+        "2020": 18.5,
+        "2023": 17.4,
+        "2026": 16.3,
+        "2011": 23.9,
+        "2018": 21.3,
+        "2025": 20.8,
+        "2030": 18.9
+      },
+      "map_time_series": {
+        "2015": 22.4,
+        "2017": 19.6,
+        "2020": 18.5,
+        "2023": 17.4,
+        "2026": 16.3
+      },
+      "hdi_time_series": {
+        "2015": 0.697,
+        "2017": 0.71,
+        "2020": 0.727,
+        "2023": 0.743,
+        "2026": 0.76
+      },
+      "annual_velocity_pp": -0.379,
+      "net_change_2015_2026_pp": -6.1,
+      "net_change_2015_2030_pp": -3.5,
+      "relative_change_pct": -15.6,
+      "ntl_annual_growth_pct": 2.2,
+      "built_growth_pct": 1.43,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Gafsa",
+      "gov_clean": "GAFSA",
+      "ins_region": "South Western",
+      "population": 342031,
+      "poverty_survey_2015": 18.0,
+      "poverty_census_2015": 19.0,
+      "time_series": {
+        "2015": 18.0,
+        "2017": 18.9,
+        "2020": 17.8,
+        "2023": 16.8,
+        "2026": 15.7,
+        "2011": 19.1,
+        "2018": 17.2,
+        "2025": 16.9,
+        "2030": 15.6
+      },
+      "map_time_series": {
+        "2015": 18.0,
+        "2017": 18.9,
+        "2020": 17.8,
+        "2023": 16.8,
+        "2026": 15.7
+      },
+      "hdi_time_series": {
+        "2015": 0.703,
+        "2017": 0.716,
+        "2020": 0.733,
+        "2023": 0.748,
+        "2026": 0.765
+      },
+      "annual_velocity_pp": -0.266,
+      "net_change_2015_2026_pp": -2.3,
+      "net_change_2015_2030_pp": -2.4,
+      "relative_change_pct": -13.3,
+      "ntl_annual_growth_pct": 1.13,
+      "built_growth_pct": 1.84,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "K\u00e9bili",
+      "gov_clean": "KEBILI",
+      "ins_region": "South Western",
+      "population": 156961,
+      "poverty_survey_2015": 18.5,
+      "poverty_census_2015": 19.2,
+      "time_series": {
+        "2015": 18.5,
+        "2017": 18.5,
+        "2020": 17.4,
+        "2023": 16.4,
+        "2026": 15.3,
+        "2011": 19.8,
+        "2018": 17.5,
+        "2025": 17.0,
+        "2030": 15.4
+      },
+      "map_time_series": {
+        "2015": 18.5,
+        "2017": 18.5,
+        "2020": 17.4,
+        "2023": 16.4,
+        "2026": 15.3
+      },
+      "hdi_time_series": {
+        "2015": 0.702,
+        "2017": 0.716,
+        "2020": 0.733,
+        "2023": 0.748,
+        "2026": 0.765
+      },
+      "annual_velocity_pp": -0.328,
+      "net_change_2015_2026_pp": -3.2,
+      "net_change_2015_2030_pp": -3.1,
+      "relative_change_pct": -16.8,
+      "ntl_annual_growth_pct": 1.88,
+      "built_growth_pct": 1.33,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "M\u00e9denine",
+      "gov_clean": "MEDENINE",
+      "ins_region": "District Tunis",
+      "population": 479520,
+      "poverty_survey_2015": 21.6,
+      "poverty_census_2015": 18.5,
+      "time_series": {
+        "2015": 21.6,
+        "2017": 17.6,
+        "2020": 16.5,
+        "2023": 15.6,
+        "2026": 14.5,
+        "2011": 23.0,
+        "2018": 20.5,
+        "2025": 20.2,
+        "2030": 18.4
+      },
+      "map_time_series": {
+        "2015": 21.6,
+        "2017": 17.6,
+        "2020": 16.5,
+        "2023": 15.6,
+        "2026": 14.5
+      },
+      "hdi_time_series": {
+        "2015": 0.714,
+        "2017": 0.727,
+        "2020": 0.744,
+        "2023": 0.76,
+        "2026": 0.777
+      },
+      "annual_velocity_pp": -0.353,
+      "net_change_2015_2026_pp": -7.1,
+      "net_change_2015_2030_pp": -3.2,
+      "relative_change_pct": -14.8,
+      "ntl_annual_growth_pct": 1.98,
+      "built_growth_pct": 1.32,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Tataouine",
+      "gov_clean": "TATAOUINE",
+      "ins_region": "South East",
+      "population": 149453,
+      "poverty_survey_2015": 15.0,
+      "poverty_census_2015": 17.8,
+      "time_series": {
+        "2015": 15.0,
+        "2017": 17.1,
+        "2020": 16.0,
+        "2023": 15.1,
+        "2026": 14.1,
+        "2011": 16.3,
+        "2018": 14.0,
+        "2025": 10.7,
+        "2030": 9.1
+      },
+      "map_time_series": {
+        "2015": 15.0,
+        "2017": 17.1,
+        "2020": 16.0,
+        "2023": 15.1,
+        "2026": 14.1
+      },
+      "hdi_time_series": {
+        "2015": 0.711,
+        "2017": 0.724,
+        "2020": 0.741,
+        "2023": 0.756,
+        "2026": 0.773
+      },
+      "annual_velocity_pp": -0.322,
+      "net_change_2015_2026_pp": -0.9,
+      "net_change_2015_2030_pp": -5.9,
+      "relative_change_pct": -39.3,
+      "ntl_annual_growth_pct": 1.65,
+      "built_growth_pct": 1.41,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Gab\u00e8s",
+      "gov_clean": "GABES",
+      "ins_region": "South East",
+      "population": 374300,
+      "poverty_survey_2015": 15.8,
+      "poverty_census_2015": 16.9,
+      "time_series": {
+        "2015": 15.8,
+        "2017": 16.2,
+        "2020": 15.1,
+        "2023": 14.2,
+        "2026": 13.1,
+        "2011": 16.6,
+        "2018": 15.2,
+        "2025": 15.1,
+        "2030": 14.0
+      },
+      "map_time_series": {
+        "2015": 15.8,
+        "2017": 16.2,
+        "2020": 15.1,
+        "2023": 14.2,
+        "2026": 13.1
+      },
+      "hdi_time_series": {
+        "2015": 0.736,
+        "2017": 0.749,
+        "2020": 0.766,
+        "2023": 0.781,
+        "2026": 0.798
+      },
+      "annual_velocity_pp": -0.212,
+      "net_change_2015_2026_pp": -2.7,
+      "net_change_2015_2030_pp": -1.8,
+      "relative_change_pct": -11.4,
+      "ntl_annual_growth_pct": 1.07,
+      "built_growth_pct": 0.98,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Bizerte",
+      "gov_clean": "BIZERTE",
+      "ins_region": "North East",
+      "population": 568219,
+      "poverty_survey_2015": 17.5,
+      "poverty_census_2015": 16.9,
+      "time_series": {
+        "2015": 17.5,
+        "2017": 15.8,
+        "2020": 14.7,
+        "2023": 13.7,
+        "2026": 12.6,
+        "2011": 18.7,
+        "2018": 16.6,
+        "2025": 16.1,
+        "2030": 14.5
+      },
+      "map_time_series": {
+        "2015": 17.5,
+        "2017": 15.8,
+        "2020": 14.7,
+        "2023": 13.7,
+        "2026": 12.6
+      },
+      "hdi_time_series": {
+        "2015": 0.751,
+        "2017": 0.765,
+        "2020": 0.782,
+        "2023": 0.797,
+        "2026": 0.814
+      },
+      "annual_velocity_pp": -0.312,
+      "net_change_2015_2026_pp": -4.9,
+      "net_change_2015_2030_pp": -3.0,
+      "relative_change_pct": -17.1,
+      "ntl_annual_growth_pct": 1.59,
+      "built_growth_pct": 1.47,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Tozeur",
+      "gov_clean": "TOZEUR",
+      "ins_region": "South Western",
+      "population": 107912,
+      "poverty_survey_2015": 14.6,
+      "poverty_census_2015": 14.6,
+      "time_series": {
+        "2015": 14.6,
+        "2017": 13.9,
+        "2020": 12.8,
+        "2023": 11.9,
+        "2026": 10.9,
+        "2011": 15.8,
+        "2018": 13.7,
+        "2025": 13.1,
+        "2030": 11.6
+      },
+      "map_time_series": {
+        "2015": 14.6,
+        "2017": 13.9,
+        "2020": 12.8,
+        "2023": 11.9,
+        "2026": 10.9
+      },
+      "hdi_time_series": {
+        "2015": 0.767,
+        "2017": 0.78,
+        "2020": 0.797,
+        "2023": 0.812,
+        "2026": 0.829
+      },
+      "annual_velocity_pp": -0.305,
+      "net_change_2015_2026_pp": -3.7,
+      "net_change_2015_2030_pp": -3.0,
+      "relative_change_pct": -20.5,
+      "ntl_annual_growth_pct": 1.51,
+      "built_growth_pct": 1.46,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Zaghouan",
+      "gov_clean": "ZAGHOUAN",
+      "ins_region": "North East",
+      "population": 176945,
+      "poverty_survey_2015": 12.1,
+      "poverty_census_2015": 13.7,
+      "time_series": {
+        "2015": 12.1,
+        "2017": 13.3,
+        "2020": 12.2,
+        "2023": 11.2,
+        "2026": 10.1,
+        "2011": 13.0,
+        "2018": 11.4,
+        "2025": 11.2,
+        "2030": 10.1
+      },
+      "map_time_series": {
+        "2015": 12.1,
+        "2017": 13.3,
+        "2020": 12.2,
+        "2023": 11.2,
+        "2026": 10.1
+      },
+      "hdi_time_series": {
+        "2015": 0.786,
+        "2017": 0.799,
+        "2020": 0.815,
+        "2023": 0.831,
+        "2026": 0.848
+      },
+      "annual_velocity_pp": -0.231,
+      "net_change_2015_2026_pp": -2.0,
+      "net_change_2015_2030_pp": -2.0,
+      "relative_change_pct": -16.5,
+      "ntl_annual_growth_pct": 1.5,
+      "built_growth_pct": 0.89,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Sousse",
+      "gov_clean": "SOUSSE",
+      "ins_region": "Centre East",
+      "population": 674818,
+      "poverty_survey_2015": 16.2,
+      "poverty_census_2015": 14.3,
+      "time_series": {
+        "2015": 16.2,
+        "2017": 13.3,
+        "2020": 12.1,
+        "2023": 11.1,
+        "2026": 10.0,
+        "2011": 17.4,
+        "2018": 15.3,
+        "2025": 14.4,
+        "2030": 12.8
+      },
+      "map_time_series": {
+        "2015": 16.2,
+        "2017": 13.3,
+        "2020": 12.1,
+        "2023": 11.1,
+        "2026": 10.0
+      },
+      "hdi_time_series": {
+        "2015": 0.793,
+        "2017": 0.806,
+        "2020": 0.823,
+        "2023": 0.838,
+        "2026": 0.855
+      },
+      "annual_velocity_pp": -0.309,
+      "net_change_2015_2026_pp": -6.2,
+      "net_change_2015_2030_pp": -3.4,
+      "relative_change_pct": -21.0,
+      "ntl_annual_growth_pct": 1.32,
+      "built_growth_pct": 1.9,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Manouba",
+      "gov_clean": "MANOUBA",
+      "ins_region": "District Tunis",
+      "population": 379518,
+      "poverty_survey_2015": 12.1,
+      "poverty_census_2015": 9.8,
+      "time_series": {
+        "2015": 12.1,
+        "2017": 8.9,
+        "2020": 7.9,
+        "2023": 6.9,
+        "2026": 5.9,
+        "2011": 13.2,
+        "2018": 11.3,
+        "2025": 9.9,
+        "2030": 8.6
+      },
+      "map_time_series": {
+        "2015": 12.1,
+        "2017": 8.9,
+        "2020": 7.9,
+        "2023": 6.9,
+        "2026": 5.9
+      },
+      "hdi_time_series": {
+        "2015": 0.848,
+        "2017": 0.861,
+        "2020": 0.878,
+        "2023": 0.893,
+        "2026": 0.91
+      },
+      "annual_velocity_pp": -0.271,
+      "net_change_2015_2026_pp": -6.2,
+      "net_change_2015_2030_pp": -3.5,
+      "relative_change_pct": -28.9,
+      "ntl_annual_growth_pct": 1.62,
+      "built_growth_pct": 1.0,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Nabeul",
+      "gov_clean": "NABEUL",
+      "ins_region": "North East",
+      "population": 705790,
+      "poverty_survey_2015": 7.4,
+      "poverty_census_2015": 8.1,
+      "time_series": {
+        "2015": 7.4,
+        "2017": 7.7,
+        "2020": 6.7,
+        "2023": 5.8,
+        "2026": 4.8,
+        "2011": 8.7,
+        "2018": 6.5,
+        "2025": 6.5,
+        "2030": 4.9
+      },
+      "map_time_series": {
+        "2015": 7.4,
+        "2017": 7.7,
+        "2020": 6.7,
+        "2023": 5.8,
+        "2026": 4.8
+      },
+      "hdi_time_series": {
+        "2015": 0.858,
+        "2017": 0.872,
+        "2020": 0.889,
+        "2023": 0.904,
+        "2026": 0.921
+      },
+      "annual_velocity_pp": -0.315,
+      "net_change_2015_2026_pp": -2.6,
+      "net_change_2015_2030_pp": -2.5,
+      "relative_change_pct": -33.8,
+      "ntl_annual_growth_pct": 1.81,
+      "built_growth_pct": 1.23,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Monastir",
+      "gov_clean": "MONASTIR",
+      "ins_region": "Centre East",
+      "population": 548828,
+      "poverty_survey_2015": 8.3,
+      "poverty_census_2015": 7.7,
+      "time_series": {
+        "2015": 8.3,
+        "2017": 6.9,
+        "2020": 5.8,
+        "2023": 4.9,
+        "2026": 3.9,
+        "2011": 9.7,
+        "2018": 7.3,
+        "2025": 7.1,
+        "2030": 5.4
+      },
+      "map_time_series": {
+        "2015": 8.3,
+        "2017": 6.9,
+        "2020": 5.8,
+        "2023": 4.9,
+        "2026": 3.9
+      },
+      "hdi_time_series": {
+        "2015": 0.875,
+        "2017": 0.889,
+        "2020": 0.905,
+        "2023": 0.921,
+        "2026": 0.938
+      },
+      "annual_velocity_pp": -0.343,
+      "net_change_2015_2026_pp": -4.4,
+      "net_change_2015_2030_pp": -2.9,
+      "relative_change_pct": -34.9,
+      "ntl_annual_growth_pct": 1.85,
+      "built_growth_pct": 1.33,
+      "sdg1_status": "Progressing (Rapid Poverty Reduction)",
+      "badge_class": "status-blue"
+    },
+    {
+      "governorate_name": "Ariana",
+      "gov_clean": "ARIANA",
+      "ins_region": "District Tunis",
+      "population": 576088,
+      "poverty_survey_2015": 5.4,
+      "poverty_census_2015": 7.0,
+      "time_series": {
+        "2015": 5.4,
+        "2017": 6.0,
+        "2020": 5.1,
+        "2023": 4.3,
+        "2026": 3.5,
+        "2011": 6.7,
+        "2018": 4.4,
+        "2025": 4.0,
+        "2030": 2.7
+      },
+      "map_time_series": {
+        "2015": 5.4,
+        "2017": 6.0,
+        "2020": 5.1,
+        "2023": 4.3,
+        "2026": 3.5
+      },
+      "hdi_time_series": {
+        "2015": 0.888,
+        "2017": 0.902,
+        "2020": 0.918,
+        "2023": 0.931,
+        "2026": 0.945
+      },
+      "annual_velocity_pp": -0.318,
+      "net_change_2015_2026_pp": -1.9,
+      "net_change_2015_2030_pp": -2.7,
+      "relative_change_pct": -50.0,
+      "ntl_annual_growth_pct": 2.08,
+      "built_growth_pct": 0.86,
+      "sdg1_status": "On Track for SDG 1 Target (<3%)",
+      "badge_class": "status-green"
+    },
+    {
+      "governorate_name": "Sfax",
+      "gov_clean": "SFAX",
+      "ins_region": "Centre East",
+      "population": 955421,
+      "poverty_survey_2015": 5.8,
+      "poverty_census_2015": 6.3,
+      "time_series": {
+        "2015": 5.8,
+        "2017": 5.6,
+        "2020": 4.7,
+        "2023": 3.8,
+        "2026": 3.0,
+        "2011": 7.0,
+        "2018": 4.9,
+        "2025": 3.3,
+        "2030": 2.6
+      },
+      "map_time_series": {
+        "2015": 5.8,
+        "2017": 5.6,
+        "2020": 4.7,
+        "2023": 3.8,
+        "2026": 3.0
+      },
+      "hdi_time_series": {
+        "2015": 0.892,
+        "2017": 0.906,
+        "2020": 0.922,
+        "2023": 0.938,
+        "2026": 0.951
+      },
+      "annual_velocity_pp": -0.297,
+      "net_change_2015_2026_pp": -2.8,
+      "net_change_2015_2030_pp": -3.2,
+      "relative_change_pct": -55.2,
+      "ntl_annual_growth_pct": 1.56,
+      "built_growth_pct": 1.44,
+      "sdg1_status": "On Track for SDG 1 Target (<3%)",
+      "badge_class": "status-green"
+    },
+    {
+      "governorate_name": "Ben Arous",
+      "gov_clean": "BEN AROUS",
+      "ins_region": "District Tunis",
+      "population": 631842,
+      "poverty_survey_2015": 4.3,
+      "poverty_census_2015": 5.6,
+      "time_series": {
+        "2015": 4.3,
+        "2017": 4.8,
+        "2020": 3.9,
+        "2023": 3.0,
+        "2026": 2.1,
+        "2011": 5.7,
+        "2018": 3.2,
+        "2025": 3.2,
+        "2030": 2.1
+      },
+      "map_time_series": {
+        "2015": 4.3,
+        "2017": 4.8,
+        "2020": 3.9,
+        "2023": 3.0,
+        "2026": 2.1
+      },
+      "hdi_time_series": {
+        "2015": 0.905,
+        "2017": 0.919,
+        "2020": 0.936,
+        "2023": 0.951,
+        "2026": 0.967
+      },
+      "annual_velocity_pp": -0.351,
+      "net_change_2015_2026_pp": -2.2,
+      "net_change_2015_2030_pp": -2.2,
+      "relative_change_pct": -51.2,
+      "ntl_annual_growth_pct": 1.86,
+      "built_growth_pct": 1.54,
+      "sdg1_status": "On Track for SDG 1 Target (<3%)",
+      "badge_class": "status-green"
+    },
+    {
+      "governorate_name": "Tunis",
+      "gov_clean": "TUNIS",
+      "ins_region": "District Tunis",
+      "population": 1037338,
+      "poverty_survey_2015": 3.5,
+      "poverty_census_2015": 4.6,
+      "time_series": {
+        "2015": 3.5,
+        "2017": 4.3,
+        "2020": 3.4,
+        "2023": 2.7,
+        "2026": 2.1,
+        "2011": 5.1,
+        "2018": 2.3,
+        "2025": 2.3,
+        "2030": 1.2
+      },
+      "map_time_series": {
+        "2015": 3.5,
+        "2017": 4.3,
+        "2020": 3.4,
+        "2023": 2.7,
+        "2026": 2.1
+      },
+      "hdi_time_series": {
+        "2015": 0.914,
+        "2017": 0.927,
+        "2020": 0.943,
+        "2023": 0.956,
+        "2026": 0.967
+      },
+      "annual_velocity_pp": -0.396,
+      "net_change_2015_2026_pp": -1.4,
+      "net_change_2015_2030_pp": -2.3,
+      "relative_change_pct": -65.7,
+      "ntl_annual_growth_pct": 2.3,
+      "built_growth_pct": 1.46,
+      "sdg1_status": "On Track for SDG 1 Target (<3%)",
+      "badge_class": "status-green"
+    }
+  ]
+}

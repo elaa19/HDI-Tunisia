@@ -1,0 +1,166 @@
+{
+  "metadata": {
+    "title": "SmartSDG Tunisia \u2014 SDG 1 decision support",
+    "ins_validation_heading": "Independent INS Validation & MOSAIKS Transfer Inference",
+    "target_r2": 0.7,
+    "disclaimer": "HDI-derived proxy != official poverty rate",
+    "source_datasets": [
+      "INS Tunisia Poverty Labels (2015)",
+      "MICS Multi-dimensional Poverty Index (MPI) Trends (2011, 2018, 2023)",
+      "World Bank / INS Multi-Decadal Development Indicators (1985-2022)"
+    ],
+    "governorate_count": 24,
+    "ins_regions_count": 7
+  },
+  "governorate_cross_sectional_2015": {
+    "pearson_r": 1.0,
+    "spearman_rho": 0.9998,
+    "r_squared": 1.0,
+    "rmse_percent": 0.06,
+    "composite_score_r": 0.6992,
+    "satellite_hdi_r": -0.9504
+  },
+  "feature_correlations": {
+    "log_NTL_mean": {
+      "name": "Log Nighttime Lights Radiance",
+      "pearson_r": -0.7052,
+      "p_value": 0.00011879546168262322
+    },
+    "log_road_density": {
+      "name": "Log Road Network Density",
+      "pearson_r": 0.028,
+      "p_value": 0.8966602760147873
+    },
+    "log_bldg_count": {
+      "name": "Log Building Density",
+      "pearson_r": 0.4815,
+      "p_value": 0.01721475406253689
+    },
+    "LST_Celsius_mean": {
+      "name": "Land Surface Temp (LST)",
+      "pearson_r": 0.0956,
+      "p_value": 0.6568943103148682
+    },
+    "NDVI_mean": {
+      "name": "NDVI Vegetation Index",
+      "pearson_r": -0.1027,
+      "p_value": 0.6328694095003586
+    },
+    "poverty_composite_score": {
+      "name": "Satellite Composite Score",
+      "pearson_r": 0.6992,
+      "p_value": 0.0001435903222671874
+    }
+  },
+  "multi_temporal_regional_analysis": {
+    "pooled_pearson_r": 0.7617,
+    "pooled_spearman_rho": 0.7052,
+    "p_value": 6.037833563391129e-05,
+    "period_correlations": {
+      "2011_2015": 0.8885,
+      "2018_2020": 0.8714,
+      "2023_2026": 0.7014
+    },
+    "poverty_reduction_rate_correlation": 0.7362,
+    "regional_breakdown": [
+      {
+        "region_name": "Central West",
+        "ins_mpi_hc_2011": 4.637,
+        "ins_mpi_hc_2018": 2.177,
+        "ins_mpi_hc_2023": 2.687,
+        "ins_mpi_val_2011": 0.0181,
+        "ins_mpi_val_2018": 0.0079,
+        "ins_mpi_val_2023": 0.0096,
+        "ins_annual_reduction_rate": 0.1625,
+        "model_poverty_2015": 32.14,
+        "model_poverty_2020": 29.94,
+        "model_poverty_2026": 27.61,
+        "model_annual_reduction_rate": 0.4121
+      },
+      {
+        "region_name": "Centre East",
+        "ins_mpi_hc_2011": 0.379,
+        "ins_mpi_hc_2018": 0.854,
+        "ins_mpi_hc_2023": 0.556,
+        "ins_mpi_val_2011": 0.0013,
+        "ins_mpi_val_2018": 0.0033,
+        "ins_mpi_val_2023": 0.0019,
+        "ins_annual_reduction_rate": -0.0148,
+        "model_poverty_2015": 14.22,
+        "model_poverty_2020": 12.28,
+        "model_poverty_2026": 10.24,
+        "model_annual_reduction_rate": 0.3615
+      },
+      {
+        "region_name": "District Tunis",
+        "ins_mpi_hc_2011": 0.0,
+        "ins_mpi_hc_2018": 0.118,
+        "ins_mpi_hc_2023": 0.728,
+        "ins_mpi_val_2011": 0.0,
+        "ins_mpi_val_2018": 0.0004,
+        "ins_mpi_val_2023": 0.0024,
+        "ins_annual_reduction_rate": -0.0607,
+        "model_poverty_2015": 6.64,
+        "model_poverty_2020": 4.97,
+        "model_poverty_2026": 3.35,
+        "model_annual_reduction_rate": 0.2985
+      },
+      {
+        "region_name": "North East",
+        "ins_mpi_hc_2011": 0.97,
+        "ins_mpi_hc_2018": 0.45,
+        "ins_mpi_hc_2023": 0.564,
+        "ins_mpi_val_2011": 0.0037,
+        "ins_mpi_val_2018": 0.0015,
+        "ins_mpi_val_2023": 0.0019,
+        "ins_annual_reduction_rate": 0.0338,
+        "model_poverty_2015": 13.95,
+        "model_poverty_2020": 12.05,
+        "model_poverty_2026": 10.03,
+        "model_annual_reduction_rate": 0.3563
+      },
+      {
+        "region_name": "North West",
+        "ins_mpi_hc_2011": 3.68,
+        "ins_mpi_hc_2018": 1.203,
+        "ins_mpi_hc_2023": 0.755,
+        "ins_mpi_val_2011": 0.0156,
+        "ins_mpi_val_2018": 0.0044,
+        "ins_mpi_val_2023": 0.0029,
+        "ins_annual_reduction_rate": 0.2437,
+        "model_poverty_2015": 27.22,
+        "model_poverty_2020": 25.11,
+        "model_poverty_2026": 22.87,
+        "model_annual_reduction_rate": 0.3955
+      },
+      {
+        "region_name": "South East",
+        "ins_mpi_hc_2011": 0.436,
+        "ins_mpi_hc_2018": 0.336,
+        "ins_mpi_hc_2023": 1.476,
+        "ins_mpi_val_2011": 0.0015,
+        "ins_mpi_val_2018": 0.0011,
+        "ins_mpi_val_2023": 0.0054,
+        "ins_annual_reduction_rate": -0.0866,
+        "model_poverty_2015": 19.88,
+        "model_poverty_2020": 17.96,
+        "model_poverty_2026": 15.91,
+        "model_annual_reduction_rate": 0.361
+      },
+      {
+        "region_name": "South Western",
+        "ins_mpi_hc_2011": 0.806,
+        "ins_mpi_hc_2018": 0.998,
+        "ins_mpi_hc_2023": 0.784,
+        "ins_mpi_val_2011": 0.0034,
+        "ins_mpi_val_2018": 0.0034,
+        "ins_mpi_val_2023": 0.0027,
+        "ins_annual_reduction_rate": 0.0018,
+        "model_poverty_2015": 20.48,
+        "model_poverty_2020": 18.49,
+        "model_poverty_2026": 16.38,
+        "model_annual_reduction_rate": 0.3731
+      }
+    ]
+  }
+}

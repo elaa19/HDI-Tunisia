@@ -1,0 +1,232 @@
+{
+  "Tunis": {
+    "governorate": "Tunis",
+    "region": "District Tunis (Capital Metropolis)",
+    "population": 1056300,
+    "poverty_trajectory": {
+      "2015": 3.5,
+      "2017": 3.4,
+      "2020": 3.2,
+      "2023": 3.0,
+      "2026": 2.8
+    },
+    "hdi_trajectory": {
+      "2015": 0.865,
+      "2017": 0.872,
+      "2020": 0.881,
+      "2023": 0.89,
+      "2026": 0.898
+    },
+    "profile": "National political, administrative & commercial capital with 1.05M residents.",
+    "historical_context": "Longstanding concentration of financial institutions, international trade ports, and higher education infrastructure resulting in the lowest regional poverty rate in Tunisia (3.5%).",
+    "post_2015_drivers": "Expansion of commercial services, fintech, digital infrastructure, and suburban transport networks. High nighttime lights radiance reflects steady economic density.",
+    "sdg_trajectory": "On track to eliminate extreme poverty ahead of SDG 1 2030 targets."
+  },
+  "Kairouan": {
+    "governorate": "Kairouan",
+    "region": "Central West (Centre-Ouest)",
+    "population": 570559,
+    "poverty_trajectory": {
+      "2015": 34.9,
+      "2017": 32.8,
+      "2020": 29.5,
+      "2023": 27.2,
+      "2026": 24.8
+    },
+    "hdi_trajectory": {
+      "2015": 0.692,
+      "2017": 0.704,
+      "2020": 0.722,
+      "2023": 0.741,
+      "2026": 0.758
+    },
+    "profile": "Historical & agricultural interior hub with significant rural delegation presence.",
+    "historical_context": "High historical baseline poverty (34.9% in 2015 survey) due to agricultural dependency, water scarcity, and lower historical capital allocation relative to coastal zones.",
+    "post_2015_drivers": "Substantial post-2015 rural electrification, deep groundwater irrigation projects, agri-food processing investments, and national social transfer programs driving 10.1 percentage point poverty drop.",
+    "sdg_trajectory": "Accelerating reduction trajectory required to meet 2030 SDG 1 regional targets."
+  },
+  "Kasserine": {
+    "governorate": "Kasserine",
+    "region": "Central West (Centre-Ouest)",
+    "population": 439243,
+    "poverty_trajectory": {
+      "2015": 32.8,
+      "2017": 30.9,
+      "2020": 27.8,
+      "2023": 25.4,
+      "2026": 23.1
+    },
+    "hdi_trajectory": {
+      "2015": 0.685,
+      "2017": 0.698,
+      "2020": 0.718,
+      "2023": 0.738,
+      "2026": 0.755
+    },
+    "profile": "Interior mountain border region with high rural agriculture & forestry workforce.",
+    "historical_context": "Structural regional disparity, elevated unemployment in remote delegations (e.g., Hassi El Ferid at 53.5% baseline poverty), and rugged terrain limiting industrial access.",
+    "post_2015_drivers": "Targeted rural development initiatives, alpha/paper manufacturing rehabilitation, solar energy expansion, and expanded road connections to coastal markets.",
+    "sdg_trajectory": "High risk of lagging without sustained targeted infrastructure funding."
+  },
+  "Sfax": {
+    "governorate": "Sfax",
+    "region": "Centre East (Centre-Est)",
+    "population": 955421,
+    "poverty_trajectory": {
+      "2015": 5.8,
+      "2017": 5.5,
+      "2020": 5.1,
+      "2023": 4.7,
+      "2026": 4.3
+    },
+    "hdi_trajectory": {
+      "2015": 0.835,
+      "2017": 0.844,
+      "2020": 0.856,
+      "2023": 0.868,
+      "2026": 0.879
+    },
+    "profile": "Second largest economic power in Tunisia; major industrial, olive oil & maritime port city.",
+    "historical_context": "Strong entrepreneurial tradition, major chemical phosphate processing, olive oil exports, and fishing industry maintaining low baseline poverty (5.8%).",
+    "post_2015_drivers": "Port modernization, renewable solar projects, expanded agro-processing industrial parks, and strong international export linkages.",
+    "sdg_trajectory": "Strong economic foundation with minimal poverty vulnerability."
+  },
+  "Sousse": {
+    "governorate": "Sousse",
+    "region": "Centre East (Centre-Est)",
+    "population": 674971,
+    "poverty_trajectory": {
+      "2015": 8.1,
+      "2017": 7.6,
+      "2020": 7.0,
+      "2023": 6.3,
+      "2026": 5.7
+    },
+    "hdi_trajectory": {
+      "2015": 0.842,
+      "2017": 0.851,
+      "2020": 0.862,
+      "2023": 0.874,
+      "2026": 0.884
+    },
+    "profile": "Major Sahel coastal hub: Tourism capital, university center & textile manufacturing power.",
+    "historical_context": "Diverse economic base combining international beach tourism, mechanical/electrical engineering industries, and high urban infrastructure quality.",
+    "post_2015_drivers": "Post-COVID tourism rebound, expansion of offshore IT services, Enfidha logistics hub growth, and high nighttime lights radiance.",
+    "sdg_trajectory": "Consistently high Human Development Index trajectory."
+  },
+  "Le Kef": {
+    "governorate": "Le Kef",
+    "region": "North West (Nord-Ouest)",
+    "population": 243125,
+    "poverty_trajectory": {
+      "2015": 34.2,
+      "2017": 32.1,
+      "2020": 28.9,
+      "2023": 26.5,
+      "2026": 24.1
+    },
+    "hdi_trajectory": {
+      "2015": 0.701,
+      "2017": 0.713,
+      "2020": 0.73,
+      "2023": 0.748,
+      "2026": 0.764
+    },
+    "profile": "North-Western mountain border region dominated by cereal & livestock farming.",
+    "historical_context": "34.2% INS 2015 baseline poverty reflecting geographical isolation, historical underinvestment in agro-processing, and rainfall dependency.",
+    "post_2015_drivers": "Cross-border trade agreements, olive & cereal value chain enhancements, and rural healthcare/education access improvements.",
+    "sdg_trajectory": "Requires accelerated rural electrification & irrigation to meet SDG targets."
+  },
+  "Sidi Bouzid": {
+    "governorate": "Sidi Bouzid",
+    "region": "Central West (Centre-Ouest)",
+    "population": 429912,
+    "poverty_trajectory": {
+      "2015": 26.0,
+      "2017": 24.4,
+      "2020": 21.8,
+      "2023": 19.8,
+      "2026": 17.9
+    },
+    "hdi_trajectory": {
+      "2015": 0.712,
+      "2017": 0.724,
+      "2020": 0.742,
+      "2023": 0.76,
+      "2026": 0.776
+    },
+    "profile": "Central Steppe agricultural power producing vegetables, dairy & poultry.",
+    "historical_context": "26.0% baseline poverty; origin site of the 2011 social movements driven by youth unemployment and regional investment disparities.",
+    "post_2015_drivers": "Major market infrastructure upgrades (Souk Jedid agrifood hub), solar pumping expansion, and improved highway linkages to coastal ports.",
+    "sdg_trajectory": "Steady poverty reduction velocity driven by agricultural modernization."
+  },
+  "Gafsa": {
+    "governorate": "Gafsa",
+    "region": "South Western (Sud-Ouest)",
+    "population": 337331,
+    "poverty_trajectory": {
+      "2015": 20.8,
+      "2017": 19.5,
+      "2020": 17.6,
+      "2023": 15.9,
+      "2026": 14.3
+    },
+    "hdi_trajectory": {
+      "2015": 0.745,
+      "2017": 0.756,
+      "2020": 0.772,
+      "2023": 0.788,
+      "2026": 0.803
+    },
+    "profile": "South-West phosphate mining basin & oasis agriculture ecosystem.",
+    "historical_context": "20.8% baseline poverty. Economic fortunes closely tied to Compagnie des Phosphates de Gafsa (CPG) production cycles and employment.",
+    "post_2015_drivers": "Phosphate transport rehabilitation, growth in solar photovoltaic farms, and economic diversification into oasis date production.",
+    "sdg_trajectory": "Moderate trajectory dependant on industrial production stability."
+  },
+  "Tataouine": {
+    "governorate": "Tataouine",
+    "region": "South East (Sud-Est)",
+    "population": 149453,
+    "poverty_trajectory": {
+      "2015": 17.8,
+      "2017": 16.7,
+      "2020": 15.0,
+      "2023": 13.5,
+      "2026": 12.1
+    },
+    "hdi_trajectory": {
+      "2015": 0.762,
+      "2017": 0.773,
+      "2020": 0.789,
+      "2023": 0.804,
+      "2026": 0.819
+    },
+    "profile": "Largest southern desert governorate with hydrocarbon services & desert tourism.",
+    "historical_context": "17.8% baseline poverty. Low population density with remote desert settlements (Remada, Dehiba) reliant on public employment and cross-border trade.",
+    "post_2015_drivers": "Nawara natural gas pipeline investments, desert eco-tourism growth, and solar power expansion (El Borma region).",
+    "sdg_trajectory": "Steady improvement with low overall population exposure."
+  },
+  "Bizerte": {
+    "governorate": "Bizerte",
+    "region": "North East (Nord-Est)",
+    "population": 568219,
+    "poverty_trajectory": {
+      "2015": 9.8,
+      "2017": 9.2,
+      "2020": 8.4,
+      "2023": 7.6,
+      "2026": 6.8
+    },
+    "hdi_trajectory": {
+      "2015": 0.812,
+      "2017": 0.822,
+      "2020": 0.835,
+      "2023": 0.848,
+      "2026": 0.86
+    },
+    "profile": "Northernmost port city: Maritime commerce, metallurgy & agro-industry.",
+    "historical_context": "9.8% baseline poverty. Strategic maritime port with established manufacturing base and proximity to Tunis metropolitan economy.",
+    "post_2015_drivers": "Bizerte smart bridge construction, port expansion, marine biotechnology park, and steady industrial exports.",
+    "sdg_trajectory": "Solid coastal economic growth trajectory."
+  }
+}

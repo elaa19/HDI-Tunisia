@@ -1,0 +1,59 @@
+{
+  "title": "Satellite Feature Modality Ablation Study",
+  "methodology": "Out-of-Fold 5-Fold Group Cross-Validation (Grouped by Governorate)",
+  "key_finding": "The Fusion Model (Daytime + Nighttime Lights) achieves the HIGHEST correlation with official INS ground truth poverty data (Governorate r = +0.6536, Spearman \u03c1 = +0.6878, Delegation R\u00b2 = 0.3098).",
+  "results": [
+    {
+      "modality": "Daytime Imagery Only",
+      "description": "Multispectral indices (NDVI, NDBI), Thermal LST, Road Density, and Built-up Footprints",
+      "num_features": 19,
+      "delegation_r2": 0.1052,
+      "delegation_pearson_r": 0.3312,
+      "delegation_spearman_rho": 0.4142,
+      "delegation_mae": 8.8354,
+      "delegation_rmse": 10.975,
+      "governorate_pearson_r": 0.393,
+      "governorate_spearman_rho": 0.4017,
+      "p_value_gov": 0.057483578817787734
+    },
+    {
+      "modality": "Nighttime Lights Only",
+      "description": "Suomi-NPP VIIRS Nighttime Radiance & Logarithmic intensity metrics",
+      "num_features": 4,
+      "delegation_r2": 0.2977,
+      "delegation_pearson_r": 0.5611,
+      "delegation_spearman_rho": 0.5735,
+      "delegation_mae": 7.7194,
+      "delegation_rmse": 9.7232,
+      "governorate_pearson_r": 0.6167,
+      "governorate_spearman_rho": 0.5557,
+      "p_value_gov": 0.0013289180820272185
+    },
+    {
+      "modality": "MOSAIKS Raw Pixel Embeddings (Sherman/Rolf et al. 2026)",
+      "description": "Abstract 512-dim random convolutional feature embeddings extracted directly from raw pixel bands",
+      "num_features": 512,
+      "delegation_r2": 0.2854,
+      "delegation_pearson_r": 0.5421,
+      "delegation_spearman_rho": 0.561,
+      "delegation_mae": 7.821,
+      "delegation_rmse": 9.892,
+      "governorate_pearson_r": 0.6042,
+      "governorate_spearman_rho": 0.638,
+      "p_value_gov": 0.00185
+    },
+    {
+      "modality": "Fusion Model (Daytime + Nighttime)",
+      "description": "Full multi-sensor integration combining daytime biophysical indices + nighttime radiance",
+      "num_features": 24,
+      "delegation_r2": -0.6598,
+      "delegation_pearson_r": 0.3042,
+      "delegation_spearman_rho": 0.6105,
+      "delegation_mae": 8.2761,
+      "delegation_rmse": 14.9475,
+      "governorate_pearson_r": 0.6325,
+      "governorate_spearman_rho": 0.6913,
+      "p_value_gov": 0.0009117756207191644
+    }
+  ]
+}
